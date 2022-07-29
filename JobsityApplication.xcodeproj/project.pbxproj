@@ -10,7 +10,6 @@
 		CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF50447289481A1008A0191 /* AppDelegate.swift */; };
 		CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF50449289481A1008A0191 /* SceneDelegate.swift */; };
 		CDF5044C289481A1008A0191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5044B289481A1008A0191 /* ViewController.swift */; };
-		CDF5044F289481A1008A0191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF5044D289481A1008A0191 /* Main.storyboard */; };
 		CDF50451289481A5008A0191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF50450289481A5008A0191 /* Assets.xcassets */; };
 		CDF50454289481A5008A0191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF50452289481A5008A0191 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		CDF50447289481A1008A0191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF50449289481A1008A0191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDF5044B289481A1008A0191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CDF5044E289481A1008A0191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDF50450289481A5008A0191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF50453289481A5008A0191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF50455289481A5008A0191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,30 @@
 		CDF50446289481A1008A0191 /* JobsityApplication */ = {
 			isa = PBXGroup;
 			children = (
-				CDF50447289481A1008A0191 /* AppDelegate.swift */,
-				CDF50449289481A1008A0191 /* SceneDelegate.swift */,
+				CDF5045B28948201008A0191 /* Application */,
+				CDF5045C28948208008A0191 /* Resources */,
 				CDF5044B289481A1008A0191 /* ViewController.swift */,
-				CDF5044D289481A1008A0191 /* Main.storyboard */,
-				CDF50450289481A5008A0191 /* Assets.xcassets */,
-				CDF50452289481A5008A0191 /* LaunchScreen.storyboard */,
 				CDF50455289481A5008A0191 /* Info.plist */,
 			);
 			path = JobsityApplication;
+			sourceTree = "<group>";
+		};
+		CDF5045B28948201008A0191 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CDF50447289481A1008A0191 /* AppDelegate.swift */,
+				CDF50449289481A1008A0191 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CDF5045C28948208008A0191 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CDF50452289481A5008A0191 /* LaunchScreen.storyboard */,
+				CDF50450289481A5008A0191 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +140,6 @@
 			files = (
 				CDF50454289481A5008A0191 /* LaunchScreen.storyboard in Resources */,
 				CDF50451289481A5008A0191 /* Assets.xcassets in Resources */,
-				CDF5044F289481A1008A0191 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +159,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CDF5044D289481A1008A0191 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDF5044E289481A1008A0191 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CDF50452289481A5008A0191 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,9 +296,9 @@
 				INFOPLIST_FILE = JobsityApplication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,9 +324,9 @@
 				INFOPLIST_FILE = JobsityApplication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
