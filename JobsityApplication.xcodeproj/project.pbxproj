@@ -26,6 +26,10 @@
 		CDF5047C28948A46008A0191 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5046F28948A46008A0191 /* Router.swift */; };
 		CDF5047D28948A46008A0191 /* NetworkRouterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5047028948A46008A0191 /* NetworkRouterError.swift */; };
 		CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5047128948A46008A0191 /* URLSessionProvider.swift */; };
+		CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048228948D81008A0191 /* ShowListRequestModel.swift */; };
+		CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048528948D99008A0191 /* ShowDAO.swift */; };
+		CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */; };
+		CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048C289492DE008A0191 /* ShowListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +54,10 @@
 		CDF5046F28948A46008A0191 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CDF5047028948A46008A0191 /* NetworkRouterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRouterError.swift; sourceTree = "<group>"; };
 		CDF5047128948A46008A0191 /* URLSessionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
+		CDF5048228948D81008A0191 /* ShowListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListRequestModel.swift; sourceTree = "<group>"; };
+		CDF5048528948D99008A0191 /* ShowDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDAO.swift; sourceTree = "<group>"; };
+		CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNetworkDAO.swift; sourceTree = "<group>"; };
+		CDF5048C289492DE008A0191 /* ShowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +121,7 @@
 		CDF5045D289487C3008A0191 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CDF5045E289487F0008A0191 /* Show.swift */,
+				CDF5047F28948D35008A0191 /* Show */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -168,6 +176,66 @@
 				CDF5047128948A46008A0191 /* URLSessionProvider.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		CDF5047F28948D35008A0191 /* Show */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048028948D3C008A0191 /* Model */,
+				CDF5048128948D5E008A0191 /* DAO */,
+				CDF5048A289492AB008A0191 /* UI */,
+			);
+			path = Show;
+			sourceTree = "<group>";
+		};
+		CDF5048028948D3C008A0191 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5045E289487F0008A0191 /* Show.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CDF5048128948D5E008A0191 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048528948D99008A0191 /* ShowDAO.swift */,
+				CDF5048728948DB4008A0191 /* NetworkDAO */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		CDF5048428948D87008A0191 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048228948D81008A0191 /* ShowListRequestModel.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
+		CDF5048728948DB4008A0191 /* NetworkDAO */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */,
+				CDF5048428948D87008A0191 /* RequestModel */,
+			);
+			path = NetworkDAO;
+			sourceTree = "<group>";
+		};
+		CDF5048A289492AB008A0191 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048B289492B9008A0191 /* ShowListView */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CDF5048B289492B9008A0191 /* ShowListView */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5048C289492DE008A0191 /* ShowListViewController.swift */,
+			);
+			path = ShowListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +310,8 @@
 			files = (
 				CDF5047528948A46008A0191 /* HTTPHeaders.swift in Sources */,
 				CDF5047828948A46008A0191 /* EncoderError.swift in Sources */,
+				CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */,
+				CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */,
 				CDF5047328948A46008A0191 /* HTTPTask.swift in Sources */,
 				CDF5047728948A46008A0191 /* NetworkManager.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
@@ -253,9 +323,11 @@
 				CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */,
 				CDF5047928948A46008A0191 /* URLParameterEncoder.swift in Sources */,
 				CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */,
+				CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */,
 				CDF5047228948A46008A0191 /* NetworkRouterEndpoint.swift in Sources */,
 				CDF5045F289487F0008A0191 /* Show.swift in Sources */,
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
+				CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */,
 				CDF5047B28948A46008A0191 /* NetworkRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

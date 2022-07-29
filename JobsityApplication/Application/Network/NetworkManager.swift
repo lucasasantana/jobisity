@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol RequestModel {
+public protocol NetworkRequestModel {
     associatedtype ResultModel: Decodable
     associatedtype EndPoint: NetworkRouterEndpoint
     
@@ -51,10 +51,22 @@ public class NetworkManager {
         self.urlSession = urlSession
     }
     
-    public func request<Request: RequestModel>(
+    public func request<Request: NetworkRequestModel>(
         with model: Request,
-        cahcePolicy: NetworkCachePolice,
-        timeout: TimeInterval,
+        cahcePolicy: NetworkCachePolice = .useProtocolCachePolicy,
+        timeout: TimeInterval = 2
+    ) async throws -> Request.ResultModel {
+        return try await withCheckedThrowingContinuation({ continuation in
+            request(with: model, cahcePolicy: cahcePolicy, timeout: timeout) { result in
+                continuation.resume(with: result)
+            }
+        })
+    }
+    
+    public func request<Request: NetworkRequestModel>(
+        with model: Request,
+        cahcePolicy: NetworkCachePolice = .useProtocolCachePolicy,
+        timeout: TimeInterval = 2,
         completion: @escaping (Result<Request.ResultModel, NetworkError>) -> Void
     ) {
     
