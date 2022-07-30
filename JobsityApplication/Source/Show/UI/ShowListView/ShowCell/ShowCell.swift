@@ -27,19 +27,30 @@ class ShowCell: UICollectionViewListCell {
             config.image = image
             
         } else {
-            let cellAcessory = UICellAccessory.CustomViewConfiguration(
-                customView: loadingPlaceholder,
-                placement: .leading(displayed: .always)
-            )
-            
-            accessories = [.customView(configuration: cellAcessory)]
-            
             Task {
                 await viewModel.loadPoster()
                 reloadItem()
             }
         }
         
+        accessories = makeAccessories(with: viewModel)
         contentConfiguration = config
+    }
+    
+    func makeAccessories(with viewModel: ShowCellViewModel) -> [UICellAccessory] {
+        var accessories: [UICellAccessory] = []
+        
+        if viewModel.poster == nil {
+            let cellAcessory = UICellAccessory.CustomViewConfiguration(
+                customView: loadingPlaceholder,
+                placement: .leading(displayed: .always)
+            )
+            
+            accessories.append(.customView(configuration: cellAcessory))
+        }
+        
+        accessories.append(.disclosureIndicator())
+        
+        return accessories
     }
 }

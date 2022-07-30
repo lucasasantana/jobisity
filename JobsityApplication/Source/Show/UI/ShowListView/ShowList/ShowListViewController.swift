@@ -8,56 +8,79 @@
 import Combine
 import UIKit
 
-class ShowListViewController: UICollectionViewController {
+class ShowListViewController: UIViewController {
     
     typealias DataSource = UICollectionViewDiffableDataSource<ShowListViewModel.Section, ShowCellViewModel>
+    typealias ShowCellRegistration = UICollectionView.CellRegistration<ShowCell, ShowCellViewModel>
     
-    lazy var dataSource = makeDataSource()
+    // MARK: Collection View DataSource configuration
+    
+    lazy var cellRegistration: ShowCellRegistration = {
+        ShowCellRegistration { cell, indexPath, cellViewModel in
+            cell.setup(with: cellViewModel) { [weak self] in
+                self?.viewModel.reloadItem(at: indexPath)
+            }
+        }
+    }()
+    
+    lazy var dataSource: DataSource = {
+        let showCellRegistration = cellRegistration
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, show in
+            return collectionView.dequeueConfiguredReusableCell(using: showCellRegistration, for: indexPath, item: show)
+        }
+        
+        return dataSource
+    }()
+    
+    // MARK: Collection View configuration
+    
+    lazy var collectionView: UICollectionView = {
+        let listConfiguration = UICollectionLayoutListConfiguration.init(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.prefetchDataSource = self
+        collectionView.delegate = self
+        
+        return collectionView
+    }()
+    
+    
+    let viewModel: ShowListViewModel
     lazy var cancellables = Set<AnyCancellable>()
-    
-    let  viewModel: ShowListViewModel
     
     init(viewModel: ShowListViewModel) {
         self.viewModel = viewModel
-        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
-        super.init(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: listConfiguration))
+        super.init(nibName: nil, bundle: nil)
+        self.title = viewModel.sceneTitle
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        self.view = collectionView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.prefetchDataSource = self
         viewModel.$snapshot.sink { [weak self] snapshot in
             self?.dataSource.apply(snapshot, animatingDifferences: true)
         }
         .store(in: &cancellables)
         viewModel.configureInitialContent()
     }
-    
-    // MARK: Data Source
-    func makeShowCellRegistration() -> UICollectionView.CellRegistration<ShowCell, ShowCellViewModel> {
-        return .init { cell, indexPath, cellViewModel in
-            cell.setup(with: cellViewModel) { [weak self] in
-                self?.viewModel.reloadItem(at: indexPath)
-            }
-        }
-    }
-    
-    func makeDataSource() -> DataSource {
-        let showCellRegistration = makeShowCellRegistration()
-        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, show in
-            return collectionView.dequeueConfiguredReusableCell(using: showCellRegistration, for: indexPath, item: show)
-        }
-        
-        return dataSource
-    }
 }
 
 extension ShowListViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         viewModel.prefetchItems(at: indexPaths)
+    }
+}
+
+extension ShowListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.handleItemSelected(at: indexPath)
     }
 }

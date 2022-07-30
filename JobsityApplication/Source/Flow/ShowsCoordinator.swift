@@ -7,11 +7,13 @@
 
 import Foundation
 import XCoordinator
+import UIKit
 
 class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
     
     enum Routes: Route {
         case showList
+        case showDetail(Show)
     }
     
     init(rootViewController: RootViewController) {
@@ -21,10 +23,11 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
     override func prepareTransition(for route: Routes) -> NavigationTransition {
         switch route {
             case .showList:
-                let viewModel = ShowListViewModel(showDAO: ShowNetworkDAO(), imageDAO: ImageKingfisherDAO())
+                let viewModel = ShowListViewModel(showDAO: ShowNetworkDAO(), imageDAO: ImageKingfisherDAO(), router: unownedRouter)
                 let showListController = ShowListViewController(viewModel: viewModel)
                 return .push(showListController)
-                
+            case .showDetail:
+                return .push(UIViewController())
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import Combine
 import UIKit
+import XCoordinator
 
 class ShowListViewModel {
     
@@ -20,6 +21,8 @@ class ShowListViewModel {
     private let showDAO: ShowDAO
     private let imageDAO: ImageDAO
     
+    let sceneTitle = "Shows"
+    
     private(set) var isLoading = false
     
     @Published
@@ -29,13 +32,16 @@ class ShowListViewModel {
     private(set) var snapshot: DataSourceSnapshot
     private var cancellables: Set<AnyCancellable>
     
-    init(showDAO: ShowDAO, imageDAO: ImageDAO) {
-        snapshot = DataSourceSnapshot()
+    private let router: UnownedRouter<ShowsCoordinator.Routes>
+    
+    init(showDAO: ShowDAO, imageDAO: ImageDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
+        self.snapshot = DataSourceSnapshot()
+        self.indexesToReload = []
+        self.cancellables = Set()
+        
         self.showDAO = showDAO
         self.imageDAO = imageDAO
-        
-        indexesToReload = []
-        cancellables = Set()
+        self.router = router
         
         $indexesToReload
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
@@ -54,12 +60,7 @@ class ShowListViewModel {
             .store(in: &cancellables)
     }
     
-    @MainActor func configureInitialContent() {
-        snapshot.appendSections([.showList])
-        fetchContent()
-    }
-    
-    @MainActor func fetchContent() {
+    @MainActor private func fetchContent() {
         guard !isLoading else { return }
         isLoading = true
         Task {
@@ -77,11 +78,29 @@ class ShowListViewModel {
         }
     }
     
+    
+}
+
+extension ShowListViewModel {
+    
+    func handleItemSelected(at indexPath: IndexPath) {
+        guard indexPath.row < snapshot.itemIdentifiers.count else { return }
+        let item = snapshot.itemIdentifiers[indexPath.row]
+        router.trigger(.showDetail(item.show))
+    }
+    
     func reloadItem(at indexPath: IndexPath) {
         indexesToReload.append(indexPath)
     }
     
-    @MainActor func prefetchItems(at indexes: [IndexPath]) {
+    @MainActor
+    func configureInitialContent() {
+        snapshot.appendSections([.showList])
+        fetchContent()
+    }
+    
+    @MainActor
+    func prefetchItems(at indexes: [IndexPath]) {
         indexes.forEach { indexPath in
             guard indexPath.row < snapshot.itemIdentifiers.count else { return }
             let item = snapshot.itemIdentifiers[indexPath.row]

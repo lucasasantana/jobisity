@@ -9,19 +9,26 @@ import UIKit
 
 class ShowCellViewModel: Hashable {
     
-    let showID: Int
-    let title: String
+    var showID: Int {
+        show.id
+    }
+    
+    var title: String {
+        show.name
+    }
+    
+    private var imageURL: URL {
+        show.poster.medium
+    }
     
     private(set) var poster: UIImage?
-    private(set) var placeholderImage: UIImage?
     
-    private let imageURL: URL
     private let imageDAO: ImageDAO
     
+    let show: Show
+    
     init(from show: Show, imageDAO: ImageDAO) {
-        self.showID = show.id
-        self.title = show.name
-        self.imageURL = show.poster.medium
+        self.show = show
         self.imageDAO = imageDAO
         
         self.poster = imageDAO.loadFromCache(imageID: "\(showID)-medium")
