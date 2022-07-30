@@ -12,31 +12,51 @@ struct ShowPoster: Decodable, Hashable {
     let original: URL
 }
 
-struct Show: Decodable, Hashable, Equatable {
+struct Schedule: Decodable {
     
+    enum Day: String, Codable {
+        case friday = "Friday"
+        case monday = "Monday"
+        case saturday = "Saturday"
+        case sunday = "Sunday"
+        case thursday = "Thursday"
+        case tuesday = "Tuesday"
+        case wednesday = "Wednesday"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case time
+        case days
+    }
+    
+    let time: String
+    let days: [Day]
+}
+
+struct Show {
     let id: Int
     let name: String
     let poster: ShowPoster
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.id = try values.decode(Int.self, forKey: .id)
-        self.name = try values.decode(String.self, forKey: .name)
-        self.poster = try values.decode(ShowPoster.self, forKey: .image)
-    }
+    let genres: [String]
+    let schedule: Schedule
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+    let summary: String
+}
+
+extension Show: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case poster = "image"
+        case genres
+        case schedule
+        case summary
     }
-    
+}
+
+extension Show: Equatable {
     static func == (lhs: Show, rhs: Show) -> Bool {
         lhs.id == rhs.id
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-        case image = "image"
     }
 }

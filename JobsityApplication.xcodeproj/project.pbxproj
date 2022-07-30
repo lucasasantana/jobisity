@@ -98,6 +98,13 @@
 			path = Flow;
 			sourceTree = "<group>";
 		};
+		CD65285028957C6A0048ACEA /* ShowDetailView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShowDetailView;
+			sourceTree = "<group>";
+		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +279,7 @@
 		CDF5048A289492AB008A0191 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				CD65285028957C6A0048ACEA /* ShowDetailView */,
 				CDF5048B289492B9008A0191 /* ShowListView */,
 			);
 			path = UI;
