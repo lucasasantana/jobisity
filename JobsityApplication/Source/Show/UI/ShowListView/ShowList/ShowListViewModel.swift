@@ -8,7 +8,6 @@
 import Combine
 import UIKit
 
-@MainActor
 class ShowListViewModel {
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, ShowCellViewModel>
@@ -30,10 +29,10 @@ class ShowListViewModel {
     private(set) var snapshot: DataSourceSnapshot
     private var cancellables: Set<AnyCancellable>
     
-    init() {
+    init(showDAO: ShowDAO, imageDAO: ImageDAO) {
         snapshot = DataSourceSnapshot()
-        showDAO = ShowNetworkDAO()
-        imageDAO = ImageKingfisherDAO()
+        self.showDAO = showDAO
+        self.imageDAO = imageDAO
         
         indexesToReload = []
         cancellables = Set()
@@ -55,12 +54,12 @@ class ShowListViewModel {
             .store(in: &cancellables)
     }
     
-    func configureInitialContent() {
+    @MainActor func configureInitialContent() {
         snapshot.appendSections([.showList])
         fetchContent()
     }
     
-    func fetchContent() {
+    @MainActor func fetchContent() {
         guard !isLoading else { return }
         isLoading = true
         Task {
@@ -82,7 +81,7 @@ class ShowListViewModel {
         indexesToReload.append(indexPath)
     }
     
-    func prefetchItems(at indexes: [IndexPath]) {
+    @MainActor func prefetchItems(at indexes: [IndexPath]) {
         indexes.forEach { indexPath in
             guard indexPath.row < snapshot.itemIdentifiers.count else { return }
             let item = snapshot.itemIdentifiers[indexPath.row]

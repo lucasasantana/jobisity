@@ -13,13 +13,18 @@ class ShowListViewController: UICollectionViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<ShowListViewModel.Section, ShowCellViewModel>
     
     lazy var dataSource = makeDataSource()
-    lazy var viewModel = ShowListViewModel()
-    
     lazy var cancellables = Set<AnyCancellable>()
     
-    convenience init() {
+    let  viewModel: ShowListViewModel
+    
+    init(viewModel: ShowListViewModel) {
+        self.viewModel = viewModel
         let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
-        self.init(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: listConfiguration))
+        super.init(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: listConfiguration))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

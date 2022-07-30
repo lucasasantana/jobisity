@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD65284928956D6D0048ACEA /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = CD65284828956D6D0048ACEA /* XCoordinator */; };
+		CD65284B28956D6D0048ACEA /* XCoordinatorCombine in Frameworks */ = {isa = PBXBuildFile; productRef = CD65284A28956D6D0048ACEA /* XCoordinatorCombine */; };
+		CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */; };
+		CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65284E289573220048ACEA /* AppCoordinator.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -38,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsCoordinator.swift; sourceTree = "<group>"; };
+		CD65284E289573220048ACEA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -74,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD65284B28956D6D0048ACEA /* XCoordinatorCombine in Frameworks */,
+				CD65284928956D6D0048ACEA /* XCoordinator in Frameworks */,
 				CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD65284628956D240048ACEA /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				CD65284E289573220048ACEA /* AppCoordinator.swift */,
+				CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +166,7 @@
 		CDF5045D289487C3008A0191 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CD65284628956D240048ACEA /* Flow */,
 				CDF5047F28948D35008A0191 /* Show */,
 			);
 			path = Source;
@@ -286,6 +304,8 @@
 			name = JobsityApplication;
 			packageProductDependencies = (
 				CDF5048F2894AEDD008A0191 /* Kingfisher */,
+				CD65284828956D6D0048ACEA /* XCoordinator */,
+				CD65284A28956D6D0048ACEA /* XCoordinatorCombine */,
 			);
 			productName = JobsityApplication;
 			productReference = CDF50444289481A1008A0191 /* JobsityApplication.app */;
@@ -317,6 +337,7 @@
 			mainGroup = CDF5043B289481A1008A0191;
 			packageReferences = (
 				CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */,
 			);
 			productRefGroup = CDF50445289481A1008A0191 /* Products */;
 			projectDirPath = "";
@@ -350,6 +371,7 @@
 				CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */,
 				CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */,
 				CDF5047328948A46008A0191 /* HTTPTask.swift in Sources */,
+				CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */,
 				CDF5047728948A46008A0191 /* NetworkManager.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
@@ -368,6 +390,7 @@
 				CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */,
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
 				CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */,
+				CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */,
 				CDF5047B28948A46008A0191 /* NetworkRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +603,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuickBirdEng/XCoordinator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -591,6 +622,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CD65284828956D6D0048ACEA /* XCoordinator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */;
+			productName = XCoordinator;
+		};
+		CD65284A28956D6D0048ACEA /* XCoordinatorCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */;
+			productName = XCoordinatorCombine;
+		};
 		CDF5048F2894AEDD008A0191 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */;
