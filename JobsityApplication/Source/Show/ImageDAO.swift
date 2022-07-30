@@ -10,7 +10,8 @@ import Kingfisher
 import UIKit
 
 protocol ImageDAO {
-    func fetch(imageWithURL url: URL) async throws -> UIImage
+    func loadFromCache(imageID: String) -> UIImage?
+    func fetch(imageWithURL url: URL, imageID: String?) async throws -> UIImage
 }
 
 
@@ -22,8 +23,13 @@ class ImageKingfisherDAO: ImageDAO {
         self.manager = manager
     }
     
-    func fetch(imageWithURL url: URL) async throws -> UIImage {
-        let resource = ImageResource(downloadURL: url)
+    
+    func loadFromCache(imageID: String) -> UIImage? {
+        ImageCache.default.retrieveImageInMemoryCache(forKey: imageID)
+    }
+    
+    func fetch(imageWithURL url: URL, imageID: String?) async throws -> UIImage {
+        let resource = ImageResource(downloadURL: url, cacheKey: imageID)
         return try await withCheckedThrowingContinuation({ continuation in
             manager.retrieveImage(with: resource) { result in
                 continuation.resume(with: result)
