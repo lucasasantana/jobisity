@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShowPoster: Decodable, Hashable {
+struct Poster: Decodable, Hashable {
     let medium: URL
     let original: URL
 }
@@ -36,7 +36,7 @@ struct Schedule: Decodable {
 struct Show {
     let id: Int
     let name: String
-    let poster: ShowPoster
+    let poster: Poster
     
     let genres: [String]
     let schedule: Schedule

@@ -26,7 +26,7 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
                 let viewModel = ShowListViewModel(showDAO: ShowNetworkDAO(), imageDAO: ImageKingfisherDAO(), router: unownedRouter)
                 return .push(ShowListViewController(viewModel: viewModel))
             case let .showDetail(show):
-                let viewModel = ShowDetailViewModel(show: show)
+                let viewModel = ShowDetailViewModel(show: show, episodesDAO: EpisodeNetworkDAO())
                 return .push(ShowDetailViewController(viewModel: viewModel))
         }
     }

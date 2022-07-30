@@ -12,29 +12,64 @@ class ShowDetailViewModel {
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Cell>
     
-    enum Section {
+    enum Section: Hashable {
         case information
+        case season(Int)
     }
     
-    enum Cell {
+    enum Cell: Hashable {
         case info
         case summary
+        case episode(Int)
     }
     
     let show: Show
+    private var seasons: [Season]
     
     @Published
     private(set) var snapshot: DataSourceSnapshot
     
-    init(show: Show) {
+    private let episodesDAO: EpisodeDAO
+    
+    init(show: Show, episodesDAO: EpisodeDAO) {
         self.snapshot = DataSourceSnapshot()
+        self.seasons = []
         
         self.show = show
+        self.episodesDAO = episodesDAO
     }
     
+    @MainActor
     func configureInitialContent() {
         snapshot.appendSections([.information])
         snapshot.appendItems([.info, .summary], toSection: .information)
+        
+        loadEpisodes()
+    }
+    
+    @MainActor
+    func loadEpisodes() {
+        Task {
+            let episodes = try await episodesDAO.fetchAll(fromShowWithID: show.id)
+            seasons = EpisodesAdapter.groupEpisodesBySeason(episodes)
+            
+            let sections = seasons.map { Section.season($0.number) }
+            snapshot.appendSections(sections)
+            
+            for season in seasons {
+                let episodes = season.episodes.map { Cell.episode($0.id) }
+                snapshot.appendItems(episodes, toSection: .season(season.number))
+            }
+        }
+    }
+    
+    func episode(at indexPath: IndexPath) -> Episode {
+        let season = indexPath.section - 1
+        return seasons[season].episodes[indexPath.row]
+    }
+    
+    func seasonNumber(at indexPath: IndexPath) -> Int {
+        return indexPath.section - 1
     }
 }
 
@@ -44,12 +79,27 @@ class ShowDetailViewController: UIViewController {
     
     typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, ShowDetailViewModel.Cell>
     typealias ShowSummaryCellRegistration = UICollectionView.CellRegistration<ShowSummaryCell, ShowDetailViewModel.Cell>
-
+    typealias EpisodeCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailViewModel.Cell>
+    
+    typealias SeasonHeaderRegistration = UICollectionView.SupplementaryRegistration<SeasonHeader>
+    
     // MARK: Collection View configuration
+    lazy var layout: UICollectionViewLayout = {
+        var informationConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        informationConfiguration.showsSeparators = false
+        
+        var seasonConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        seasonConfiguration.headerMode = .supplementary
+        
+        return UICollectionViewCompositionalLayout { section, layoutEnviroment in
+            guard section > .zero else  {
+                return NSCollectionLayoutSection.list(using: informationConfiguration, layoutEnvironment: layoutEnviroment)
+            }
+            return NSCollectionLayoutSection.list(using: seasonConfiguration, layoutEnvironment: layoutEnviroment)
+        }
+    }()
+    
     lazy var collectionView: UICollectionView = {
-        var listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
-        listConfiguration.showsSeparators = false
-        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
@@ -66,9 +116,30 @@ class ShowDetailViewController: UIViewController {
         }
     }()
     
+    lazy var episodeCellRegistration: EpisodeCellRegistration = {
+        EpisodeCellRegistration { [unowned self] cell, indexPath, _ in
+            var config = cell.defaultContentConfiguration()
+            let episode = viewModel.episode(at: indexPath)
+            config.text = episode.name
+            cell.contentConfiguration = config
+        }
+    }()
+    
+    lazy var seasonHeaderRegistration: SeasonHeaderRegistration = {
+        SeasonHeaderRegistration(elementKind: UICollectionView.elementKindSectionHeader) { [unowned self] (headerView, elementKind, indexPath) in
+            if indexPath.section > .zero {
+                headerView.setup(with: viewModel.seasonNumber(at: indexPath))
+            }
+        }
+    }()
+    
     lazy var dataSource: DataSource = {
         let showInformationCellRegistration = showInformationCellRegistration
         let showSummaryCellRegistration = showSummaryCellRegistration
+        let espisodeCellRegistration = episodeCellRegistration
+        
+        let seasonHeaderRegistration = seasonHeaderRegistration
+        
         let dataSource = DataSource(collectionView: collectionView) { [unowned self] collectionView, indexPath, cell in
             switch cell {
                 case .info:
@@ -83,9 +154,22 @@ class ShowDetailViewController: UIViewController {
                         for: indexPath,
                         item: cell
                     )
+                case .episode:
+                    return collectionView.dequeueConfiguredReusableCell(
+                        using: espisodeCellRegistration,
+                        for: indexPath,
+                        item: cell
+                    )
             }
         }
         
+        dataSource.supplementaryViewProvider = { [unowned self] (collectionView, _, indexPath) -> UICollectionReusableView? in
+            return collectionView.dequeueConfiguredReusableSupplementary(
+                using: seasonHeaderRegistration,
+                for: indexPath
+            )
+        }
+    
         return dataSource
     }()
     
@@ -107,10 +191,13 @@ class ShowDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.$snapshot.sink { [weak self] snapshot in
-            self?.dataSource.apply(snapshot, animatingDifferences: true)
-        }
-        .store(in: &cancellables)
+        viewModel
+            .$snapshot
+            .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
+            .sink { [weak self] snapshot in
+                self?.dataSource.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &cancellables)
         viewModel.configureInitialContent()
     }
 }

@@ -17,6 +17,12 @@
 		CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65285B2895882C0048ACEA /* ViewCodable.swift */; };
 		CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528632895AAF30048ACEA /* UILabel+HTML.swift */; };
 		CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */; };
+		CD7881172895D54B0085B0F5 /* EpisodeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881162895D54B0085B0F5 /* EpisodeDAO.swift */; };
+		CD78811B2895D7F60085B0F5 /* EpisodeNetworkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78811A2895D7F60085B0F5 /* EpisodeNetworkDAO.swift */; };
+		CD78811E2895D8190085B0F5 /* EpisodeListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78811D2895D8190085B0F5 /* EpisodeListRequestModel.swift */; };
+		CD7881202895D82E0085B0F5 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78811F2895D82E0085B0F5 /* Episode.swift */; };
+		CD7881222895D8F90085B0F5 /* EpisodesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */; };
+		CD7881252895E3C90085B0F5 /* SeasonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881242895E3C90085B0F5 /* SeasonHeader.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -56,6 +62,12 @@
 		CD65285B2895882C0048ACEA /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
 		CD6528632895AAF30048ACEA /* UILabel+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+HTML.swift"; sourceTree = "<group>"; };
 		CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSummaryCell.swift; sourceTree = "<group>"; };
+		CD7881162895D54B0085B0F5 /* EpisodeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDAO.swift; sourceTree = "<group>"; };
+		CD78811A2895D7F60085B0F5 /* EpisodeNetworkDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeNetworkDAO.swift; sourceTree = "<group>"; };
+		CD78811D2895D8190085B0F5 /* EpisodeListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListRequestModel.swift; sourceTree = "<group>"; };
+		CD78811F2895D82E0085B0F5 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesAdapter.swift; sourceTree = "<group>"; };
+		CD7881242895E3C90085B0F5 /* SeasonHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonHeader.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +125,7 @@
 		CD65285028957C6A0048ACEA /* ShowDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				CD7881232895E3BB0085B0F5 /* Headers */,
 				CD652853289585780048ACEA /* Cells */,
 				CD652851289583960048ACEA /* ShowDetailViewController.swift */,
 			);
@@ -150,6 +163,66 @@
 				CD6528632895AAF30048ACEA /* UILabel+HTML.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CD7881122895D4FA0085B0F5 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				CDF504922894B33C008A0191 /* ImageDAO.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		CD7881132895D5120085B0F5 /* Episodes */ = {
+			isa = PBXGroup;
+			children = (
+				CD7881182895D58B0085B0F5 /* Model */,
+				CD7881142895D52A0085B0F5 /* DAO */,
+				CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */,
+			);
+			path = Episodes;
+			sourceTree = "<group>";
+		};
+		CD7881142895D52A0085B0F5 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				CD7881162895D54B0085B0F5 /* EpisodeDAO.swift */,
+				CD7881192895D7E70085B0F5 /* NetworkDAO */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		CD7881182895D58B0085B0F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD78811F2895D82E0085B0F5 /* Episode.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CD7881192895D7E70085B0F5 /* NetworkDAO */ = {
+			isa = PBXGroup;
+			children = (
+				CD78811C2895D8030085B0F5 /* RequestModel */,
+				CD78811A2895D7F60085B0F5 /* EpisodeNetworkDAO.swift */,
+			);
+			path = NetworkDAO;
+			sourceTree = "<group>";
+		};
+		CD78811C2895D8030085B0F5 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD78811D2895D8190085B0F5 /* EpisodeListRequestModel.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
+		CD7881232895E3BB0085B0F5 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				CD7881242895E3C90085B0F5 /* SeasonHeader.swift */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
@@ -224,7 +297,9 @@
 			isa = PBXGroup;
 			children = (
 				CD65284628956D240048ACEA /* Flow */,
+				CD7881122895D4FA0085B0F5 /* Image */,
 				CDF5047F28948D35008A0191 /* Show */,
+				CD7881132895D5120085B0F5 /* Episodes */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -287,7 +362,6 @@
 				CDF5048028948D3C008A0191 /* Model */,
 				CDF5048128948D5E008A0191 /* DAO */,
 				CDF5048A289492AB008A0191 /* UI */,
-				CDF504922894B33C008A0191 /* ImageDAO.swift */,
 			);
 			path = Show;
 			sourceTree = "<group>";
@@ -424,12 +498,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF504932894B33C008A0191 /* ImageDAO.swift in Sources */,
+				CD7881222895D8F90085B0F5 /* EpisodesAdapter.swift in Sources */,
 				CDF5047528948A46008A0191 /* HTTPHeaders.swift in Sources */,
 				CDF5047828948A46008A0191 /* EncoderError.swift in Sources */,
 				CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */,
 				CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */,
 				CDF5047328948A46008A0191 /* HTTPTask.swift in Sources */,
+				CD78811B2895D7F60085B0F5 /* EpisodeNetworkDAO.swift in Sources */,
+				CD7881172895D54B0085B0F5 /* EpisodeDAO.swift in Sources */,
 				CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */,
+				CD7881202895D82E0085B0F5 /* Episode.swift in Sources */,
 				CDF5047728948A46008A0191 /* NetworkManager.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
@@ -444,10 +522,12 @@
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
 				CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */,
 				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
+				CD7881252895E3C90085B0F5 /* SeasonHeader.swift in Sources */,
 				CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */,
 				CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */,
 				CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */,
 				CDF5047228948A46008A0191 /* NetworkRouterEndpoint.swift in Sources */,
+				CD78811E2895D8190085B0F5 /* EpisodeListRequestModel.swift in Sources */,
 				CDF5045F289487F0008A0191 /* Show.swift in Sources */,
 				CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */,
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
