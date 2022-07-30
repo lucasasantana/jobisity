@@ -30,6 +30,8 @@
 		CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048528948D99008A0191 /* ShowDAO.swift */; };
 		CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */; };
 		CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048C289492DE008A0191 /* ShowListViewController.swift */; };
+		CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CDF5048F2894AEDD008A0191 /* Kingfisher */; };
+		CDF504932894B33C008A0191 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF504922894B33C008A0191 /* ImageDAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,7 @@
 		CDF5048528948D99008A0191 /* ShowDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDAO.swift; sourceTree = "<group>"; };
 		CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNetworkDAO.swift; sourceTree = "<group>"; };
 		CDF5048C289492DE008A0191 /* ShowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewController.swift; sourceTree = "<group>"; };
+		CDF504922894B33C008A0191 /* ImageDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +188,7 @@
 				CDF5048028948D3C008A0191 /* Model */,
 				CDF5048128948D5E008A0191 /* DAO */,
 				CDF5048A289492AB008A0191 /* UI */,
+				CDF504922894B33C008A0191 /* ImageDAO.swift */,
 			);
 			path = Show;
 			sourceTree = "<group>";
@@ -254,6 +259,9 @@
 			dependencies = (
 			);
 			name = JobsityApplication;
+			packageProductDependencies = (
+				CDF5048F2894AEDD008A0191 /* Kingfisher */,
+			);
 			productName = JobsityApplication;
 			productReference = CDF50444289481A1008A0191 /* JobsityApplication.app */;
 			productType = "com.apple.product-type.application";
@@ -282,6 +290,9 @@
 				Base,
 			);
 			mainGroup = CDF5043B289481A1008A0191;
+			packageReferences = (
+				CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = CDF50445289481A1008A0191 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF504932894B33C008A0191 /* ImageDAO.swift in Sources */,
 				CDF5047528948A46008A0191 /* HTTPHeaders.swift in Sources */,
 				CDF5047828948A46008A0191 /* EncoderError.swift in Sources */,
 				CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */,
@@ -538,6 +550,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDF5048F2894AEDD008A0191 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDF5043C289481A1008A0191 /* Project object */;
 }

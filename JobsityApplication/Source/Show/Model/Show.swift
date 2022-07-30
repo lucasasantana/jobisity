@@ -12,7 +12,7 @@ struct ShowPoster: Decodable, Hashable {
     let original: URL
 }
 
-struct Show: Decodable, Hashable {
+struct Show: Decodable, Hashable, Equatable {
     
     let id: Int
     let name: String
@@ -24,6 +24,14 @@ struct Show: Decodable, Hashable {
         self.id = try values.decode(Int.self, forKey: .id)
         self.name = try values.decode(String.self, forKey: .name)
         self.poster = try values.decode(ShowPoster.self, forKey: .image)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: Show, rhs: Show) -> Bool {
+        lhs.id == rhs.id
     }
     
     enum CodingKeys: String, CodingKey {
