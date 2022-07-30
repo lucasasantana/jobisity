@@ -24,10 +24,10 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
         switch route {
             case .showList:
                 let viewModel = ShowListViewModel(showDAO: ShowNetworkDAO(), imageDAO: ImageKingfisherDAO(), router: unownedRouter)
-                let showListController = ShowListViewController(viewModel: viewModel)
-                return .push(showListController)
-            case .showDetail:
-                return .push(UIViewController())
+                return .push(ShowListViewController(viewModel: viewModel))
+            case let .showDetail(show):
+                let viewModel = ShowDetailViewModel(show: show)
+                return .push(ShowDetailViewController(viewModel: viewModel))
         }
     }
 }

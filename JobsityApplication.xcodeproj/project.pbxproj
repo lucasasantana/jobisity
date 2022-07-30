@@ -11,6 +11,11 @@
 		CD65284B28956D6D0048ACEA /* XCoordinatorCombine in Frameworks */ = {isa = PBXBuildFile; productRef = CD65284A28956D6D0048ACEA /* XCoordinatorCombine */; };
 		CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */; };
 		CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65284E289573220048ACEA /* AppCoordinator.swift */; };
+		CD652852289583960048ACEA /* ShowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652851289583960048ACEA /* ShowDetailViewController.swift */; };
+		CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528552895859D0048ACEA /* ShowInformationCell.swift */; };
+		CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */; };
+		CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65285B2895882C0048ACEA /* ViewCodable.swift */; };
+		CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528632895AAF30048ACEA /* UILabel+HTML.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -44,6 +49,11 @@
 /* Begin PBXFileReference section */
 		CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsCoordinator.swift; sourceTree = "<group>"; };
 		CD65284E289573220048ACEA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		CD652851289583960048ACEA /* ShowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewController.swift; sourceTree = "<group>"; };
+		CD6528552895859D0048ACEA /* ShowInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInformationCell.swift; sourceTree = "<group>"; };
+		CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsBuilder.swift; sourceTree = "<group>"; };
+		CD65285B2895882C0048ACEA /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
+		CD6528632895AAF30048ACEA /* UILabel+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+HTML.swift"; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -101,8 +111,50 @@
 		CD65285028957C6A0048ACEA /* ShowDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				CD652853289585780048ACEA /* Cells */,
+				CD652851289583960048ACEA /* ShowDetailViewController.swift */,
 			);
 			path = ShowDetailView;
+			sourceTree = "<group>";
+		};
+		CD652853289585780048ACEA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CD6528542895857F0048ACEA /* ShowInformationCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CD6528542895857F0048ACEA /* ShowInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD6528552895859D0048ACEA /* ShowInformationCell.swift */,
+			);
+			path = ShowInformationCell;
+			sourceTree = "<group>";
+		};
+		CD652857289586FD0048ACEA /* ConstraintsBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */,
+			);
+			path = ConstraintsBuilder;
+			sourceTree = "<group>";
+		};
+		CD65285A2895881F0048ACEA /* ViewCodable */ = {
+			isa = PBXGroup;
+			children = (
+				CD65285B2895882C0048ACEA /* ViewCodable.swift */,
+			);
+			path = ViewCodable;
+			sourceTree = "<group>";
+		};
+		CD6528602895A4880048ACEA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CD6528632895AAF30048ACEA /* UILabel+HTML.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
@@ -154,6 +206,9 @@
 		CDF5045B28948201008A0191 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				CD6528602895A4880048ACEA /* Extensions */,
+				CD65285A2895881F0048ACEA /* ViewCodable */,
+				CD652857289586FD0048ACEA /* ConstraintsBuilder */,
 				CDF5046028948A05008A0191 /* Network */,
 				CDF50447289481A1008A0191 /* AppDelegate.swift */,
 				CDF50449289481A1008A0191 /* SceneDelegate.swift */,
@@ -389,7 +444,10 @@
 				CDF5047428948A46008A0191 /* HTTPMethod.swift in Sources */,
 				CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */,
 				CDF5047928948A46008A0191 /* URLParameterEncoder.swift in Sources */,
+				CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */,
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
+				CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */,
+				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
 				CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */,
 				CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */,
 				CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */,
@@ -397,6 +455,8 @@
 				CDF5045F289487F0008A0191 /* Show.swift in Sources */,
 				CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */,
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
+				CD652852289583960048ACEA /* ShowDetailViewController.swift in Sources */,
+				CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */,
 				CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */,
 				CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */,
 				CDF5047B28948A46008A0191 /* NetworkRouter.swift in Sources */,
@@ -555,7 +615,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -583,7 +643,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
