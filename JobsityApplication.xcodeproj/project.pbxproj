@@ -16,6 +16,7 @@
 		CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */; };
 		CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65285B2895882C0048ACEA /* ViewCodable.swift */; };
 		CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528632895AAF30048ACEA /* UILabel+HTML.swift */; };
+		CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -54,6 +55,7 @@
 		CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsBuilder.swift; sourceTree = "<group>"; };
 		CD65285B2895882C0048ACEA /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
 		CD6528632895AAF30048ACEA /* UILabel+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+HTML.swift"; sourceTree = "<group>"; };
+		CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSummaryCell.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -120,17 +122,10 @@
 		CD652853289585780048ACEA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CD6528542895857F0048ACEA /* ShowInformationCell */,
+				CD6528552895859D0048ACEA /* ShowInformationCell.swift */,
+				CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		CD6528542895857F0048ACEA /* ShowInformationCell */ = {
-			isa = PBXGroup;
-			children = (
-				CD6528552895859D0048ACEA /* ShowInformationCell.swift */,
-			);
-			path = ShowInformationCell;
 			sourceTree = "<group>";
 		};
 		CD652857289586FD0048ACEA /* ConstraintsBuilder */ = {
@@ -441,6 +436,7 @@
 				CDF5044C289481A1008A0191 /* ViewController.swift in Sources */,
 				CDF5047C28948A46008A0191 /* Router.swift in Sources */,
 				CDF5047D28948A46008A0191 /* NetworkRouterError.swift in Sources */,
+				CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */,
 				CDF5047428948A46008A0191 /* HTTPMethod.swift in Sources */,
 				CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */,
 				CDF5047928948A46008A0191 /* URLParameterEncoder.swift in Sources */,

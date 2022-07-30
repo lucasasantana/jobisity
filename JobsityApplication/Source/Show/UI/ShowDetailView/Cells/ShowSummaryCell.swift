@@ -1,5 +1,5 @@
 //
-//  ShowInformationCell.swift
+//  ShowSummaryCell.swift
 //  JobsityApplication
 //
 //  Created by Lucas Antevere Santana on 30/07/22.
@@ -7,15 +7,12 @@
 
 import Combine
 import UIKit
-import Kingfisher
 
-class ShowInformationCellContentView: UIView, UIContentView {
+class ShowSummaryCellContentView: UIView, UIContentView {
     
     enum Constants {
         static let horizontalPadding: CGFloat = 16
         static let verticalPadding: CGFloat = 8
-        
-        static let horizontalSpacing: CGFloat = 16
     }
     
     var configuration: UIContentConfiguration {
@@ -24,28 +21,19 @@ class ShowInformationCellContentView: UIView, UIContentView {
         }
     }
     
+    // MARK: Stacks
     lazy var rootStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 32
+        stackView.spacing = 8
         return stackView
     }()
     
-    lazy var headerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        return stackView
-    }()
-    
-    lazy var posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
+    // MARK: Labels
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.numberOfLines = 1
+        label.font = .boldSystemFont(ofSize: 24)
         return label
     }()
     
@@ -55,7 +43,7 @@ class ShowInformationCellContentView: UIView, UIContentView {
         return label
     }()
     
-    init(configuration: ShowInformationCellContentConfiguration) {
+    init(configuration: ShowSummaryCellContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
         setupView()
@@ -67,36 +55,29 @@ class ShowInformationCellContentView: UIView, UIContentView {
     }
     
     func apply(configuration: UIContentConfiguration) {
-        guard let showInformationConfig = configuration as? ShowInformationCellContentConfiguration else {
+        guard let showInformationConfig = configuration as? ShowSummaryCellContentConfiguration else {
             return
         }
         
-        titleLabel.text = showInformationConfig.title
+        titleLabel.text = "Summary"
         summaryLabel.setHTMLFromString(htmlText: showInformationConfig.summary)
-        
-        let imageResource = ImageResource(downloadURL: showInformationConfig.imageURL)
-        posterImageView.kf.setImage(with: imageResource)
     }
 }
 
-extension ShowInformationCellContentView: ViewCodable {
+extension ShowSummaryCellContentView: ViewCodable {
     
     func setupViewHierarchy() {
         
         addSubview(rootStackView)
         
-        rootStackView.addArrangedSubview(headerStackView)
+        rootStackView.addArrangedSubview(titleLabel)
         rootStackView.addArrangedSubview(summaryLabel)
-        
-        headerStackView.addArrangedSubview(posterImageView)
-        headerStackView.addArrangedSubview(titleLabel)
     }
     
     func setupConstraints() {
         
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        posterImageView.setContentHuggingPriority(.required, for: .horizontal)
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate {
@@ -104,22 +85,16 @@ extension ShowInformationCellContentView: ViewCodable {
             rootStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.verticalPadding)
             rootStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.horizontalPadding)
             rootStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.horizontalPadding)
-            
-            posterImageView.heightAnchor.constraint(equalToConstant: 150)
-            posterImageView.widthAnchor.constraint(equalTo: posterImageView.heightAnchor, multiplier: 0.7)
         }
     }
 }
 
-struct ShowInformationCellContentConfiguration: UIContentConfiguration {
+struct ShowSummaryCellContentConfiguration: UIContentConfiguration {
     
-    var title: String
-    var imageURL: URL
-    
-    var summary: String?
+    let summary: String?
     
     func makeContentView() -> UIView & UIContentView {
-        return ShowInformationCellContentView(configuration: self)
+        return ShowSummaryCellContentView(configuration: self)
     }
     
     func updated(for state: UIConfigurationState) -> Self {
@@ -127,13 +102,12 @@ struct ShowInformationCellContentConfiguration: UIContentConfiguration {
     }
 }
 
-class ShowInformationCell: UICollectionViewListCell {
+class ShowSummaryCell: UICollectionViewListCell {
     func setup(withShow show: Show) {
-        let config = ShowInformationCellContentConfiguration(
-            title: show.name,
-            imageURL: show.poster.medium,
+        let config = ShowSummaryCellContentConfiguration(
             summary: show.summary
         )
         contentConfiguration = config
     }
 }
+

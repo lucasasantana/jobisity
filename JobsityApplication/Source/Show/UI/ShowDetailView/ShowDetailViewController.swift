@@ -10,10 +10,15 @@ import UIKit
 
 class ShowDetailViewModel {
     
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, UUID>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Cell>
     
     enum Section {
         case information
+    }
+    
+    enum Cell {
+        case info
+        case summary
     }
     
     let show: Show
@@ -29,14 +34,16 @@ class ShowDetailViewModel {
     
     func configureInitialContent() {
         snapshot.appendSections([.information])
-        snapshot.appendItems([UUID()], toSection: .information)
+        snapshot.appendItems([.info, .summary], toSection: .information)
     }
 }
 
 class ShowDetailViewController: UIViewController {
     
-    typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailViewModel.Section, UUID>
-    typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, UUID>
+    typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailViewModel.Section, ShowDetailViewModel.Cell>
+    
+    typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, ShowDetailViewModel.Cell>
+    typealias ShowSummaryCellRegistration = UICollectionView.CellRegistration<ShowSummaryCell, ShowDetailViewModel.Cell>
 
     // MARK: Collection View configuration
     lazy var collectionView: UICollectionView = {
@@ -53,10 +60,30 @@ class ShowDetailViewController: UIViewController {
         }
     }()
     
+    lazy var showSummaryCellRegistration: ShowSummaryCellRegistration = {
+        ShowSummaryCellRegistration { [unowned self] cell, indexPath, _ in
+            cell.setup(withShow: self.viewModel.show)
+        }
+    }()
+    
     lazy var dataSource: DataSource = {
         let showInformationCellRegistration = showInformationCellRegistration
-        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, show in
-            return collectionView.dequeueConfiguredReusableCell(using: showInformationCellRegistration, for: indexPath, item: show)
+        let showSummaryCellRegistration = showSummaryCellRegistration
+        let dataSource = DataSource(collectionView: collectionView) { [unowned self] collectionView, indexPath, cell in
+            switch cell {
+                case .info:
+                    return collectionView.dequeueConfiguredReusableCell(
+                        using: showInformationCellRegistration,
+                        for: indexPath,
+                        item: cell
+                    )
+                case .summary:
+                    return collectionView.dequeueConfiguredReusableCell(
+                        using: showSummaryCellRegistration,
+                        for: indexPath,
+                        item: cell
+                    )
+            }
         }
         
         return dataSource

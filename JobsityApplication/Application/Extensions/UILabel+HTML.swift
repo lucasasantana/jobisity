@@ -20,14 +20,19 @@ extension UILabel {
             content
         )
         
-        let attrStr = try? NSAttributedString(
-            data: modifiedFont.data(using: .unicode, allowLossyConversion: true)!,
+        let attrStr = try? NSMutableAttributedString(
+            data: Data(modifiedFont.utf8),
             options: [
                 .documentType: NSAttributedString.DocumentType.html,
                 .characterEncoding:String.Encoding.utf8.rawValue
             ],
             documentAttributes: nil
         )
+        
+        let range = NSRange(location: .zero, length: attrStr?.length ?? .zero)
+        
+        attrStr?.removeAttribute(.foregroundColor, range: range)
+        attrStr?.addAttributes([.foregroundColor: textColor ?? .label], range: range)
         
         self.text = nil
         self.attributedText = attrStr
