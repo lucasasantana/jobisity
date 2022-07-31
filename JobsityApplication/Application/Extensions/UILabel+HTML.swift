@@ -17,7 +17,7 @@ extension UILabel {
         
         let modifiedFont = String(
             format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size: \(font.pointSize)\">%@</span>",
-            content
+            content.trimmingCharacters(in: .whitespacesAndNewlines)
         )
         
         let attrStr = try? NSMutableAttributedString(
@@ -33,6 +33,8 @@ extension UILabel {
         
         attrStr?.removeAttribute(.foregroundColor, range: range)
         attrStr?.addAttributes([.foregroundColor: textColor ?? .label], range: range)
+        
+        attrStr?.trimCharactersInSet(charSet: .whitespacesAndNewlines)
         
         self.text = nil
         self.attributedText = attrStr

@@ -7,50 +7,102 @@
 
 import UIKit
 
-class ShowCell: UICollectionViewListCell {
+class ShowCellContentView: UIView, UIContentView {
     
-    lazy var loadingPlaceholder: UIView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.style = .medium
-        activityIndicator.startAnimating()
-        
-        return activityIndicator
-    }()
-    
-    func setup(with viewModel: ShowCellViewModel, reloadItem: @escaping () -> Void) {
-        var config = defaultContentConfiguration()
-        config.text = viewModel.title
-        config.imageProperties.maximumSize = CGSize(width: 150, height: 150)
-        
-        if let image = viewModel.poster {
-            accessories = []
-            config.image = image
-            
-        } else {
-            Task {
-                await viewModel.loadPoster()
-                reloadItem()
-            }
+    var configuration: UIContentConfiguration {
+        didSet {
+            apply(configuration: configuration)
         }
-        
-        accessories = makeAccessories(with: viewModel)
-        contentConfiguration = config
     }
     
-    func makeAccessories(with viewModel: ShowCellViewModel) -> [UICellAccessory] {
-        var accessories: [UICellAccessory] = []
+    lazy var posterView: AsyncImage = {
+        let imageView = AsyncImage()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = .zero
+        label.font = .boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    lazy var rootStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        return stack
+    }()
+    
+    internal init(configuration: UIContentConfiguration) {
+        self.configuration = configuration
+        super.init(frame: .zero)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ShowCellContentView: ViewCodable {
+    func setupViewHierarchy() {
+        addSubview(rootStackView)
         
-        if viewModel.poster == nil {
-            let cellAcessory = UICellAccessory.CustomViewConfiguration(
-                customView: loadingPlaceholder,
-                placement: .leading(displayed: .always)
-            )
+        rootStackView.addArrangedSubview(posterView)
+        rootStackView.addArrangedSubview(titleLabel)
+    }
+    
+    func setupConstraints() {
+        rootStackView.translatesAutoresizingMaskIntoConstraints = false
+                
+        NSLayoutConstraint.activate {
+            rootStackView.heightAnchor.constraint(equalToConstant: 150)
+            posterView.widthAnchor.constraint(equalToConstant: 107)
             
-            accessories.append(.customView(configuration: cellAcessory))
+            rootStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor)
+            rootStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
+            rootStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            rootStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor)
+        }
+    }
+    
+    func apply(configuration: UIContentConfiguration) {
+        guard let showCellConfig = configuration as? ShowCellConfiguration else {
+            return
         }
         
-        accessories.append(.disclosureIndicator())
+        titleLabel.text = showCellConfig.title
+        posterView.imageURL = showCellConfig.posterURL
+    }
+}
+
+struct ShowCellConfiguration: UIContentConfiguration {
+    
+    let title: String
+    let posterURL: URL
+    
+    func makeContentView() -> UIView & UIContentView {
+        ShowCellContentView(configuration: self)
+    }
+    
+    func updated(for state: UIConfigurationState) -> ShowCellConfiguration {
+        return self
+    }
+}
+
+class ShowCell: UICollectionViewListCell {
+    
+    func setup(with viewModel: ShowCellViewModel) {
+        let config = ShowCellConfiguration(
+            title: viewModel.title,
+            posterURL: viewModel.poster
+        )
         
-        return accessories
+        contentConfiguration = config
+        
+        let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .automatic)
+        accessories = [.outlineDisclosure(options: headerDisclosureOption)]
     }
 }

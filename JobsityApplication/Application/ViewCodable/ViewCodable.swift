@@ -5,7 +5,7 @@
 //  Created by Lucas Antevere Santana on 30/07/22.
 //
 
-import Foundation
+import UIKit
 
 protocol ViewCodable {
     

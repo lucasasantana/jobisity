@@ -78,8 +78,8 @@ class ShowDetailViewController: UIViewController {
             config.text = "Season \(value)"
             
             let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .header)
-            
             cell.accessories = [.outlineDisclosure(options: headerDisclosureOption)]
+            
             cell.contentConfiguration = config
         }
     }()

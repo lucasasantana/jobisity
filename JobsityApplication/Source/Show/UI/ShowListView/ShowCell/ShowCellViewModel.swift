@@ -17,29 +17,14 @@ class ShowCellViewModel: Hashable {
         show.name
     }
     
-    private var imageURL: URL {
+    var poster: URL {
         show.poster.medium
     }
     
-    private(set) var poster: UIImage?
-    
-    private let imageDAO: ImageDAO
-    
     let show: Show
     
-    init(from show: Show, imageDAO: ImageDAO) {
+    init(from show: Show) {
         self.show = show
-        self.imageDAO = imageDAO
-        
-        self.poster = imageDAO.loadFromCache(imageID: "\(showID)-medium")
-    }
-    
-    func loadPoster() async {
-        do {
-            poster = try await imageDAO.fetch(imageWithURL: imageURL, imageID: "\(showID)-medium")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
     }
     
     func hash(into hasher: inout Hasher) {

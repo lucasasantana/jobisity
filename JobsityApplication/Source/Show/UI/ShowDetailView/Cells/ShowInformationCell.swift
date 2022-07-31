@@ -39,8 +39,8 @@ class ShowInformationCellContentView: UIView, UIContentView {
     }()
     
     // MARK: Images
-    lazy var posterImageView: UIImageView = {
-        let imageView = UIImageView()
+    lazy var posterImageView: AsyncImage = {
+        let imageView = AsyncImage()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -102,8 +102,7 @@ class ShowInformationCellContentView: UIView, UIContentView {
         })
         
         // Poster
-        let imageResource = ImageResource(downloadURL: showInformationConfig.imageURL)
-        posterImageView.kf.setImage(with: imageResource)
+        posterImageView.imageURL = showInformationConfig.imageURL
     }
 }
 

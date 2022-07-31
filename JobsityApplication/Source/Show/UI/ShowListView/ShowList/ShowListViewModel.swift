@@ -26,9 +26,6 @@ class ShowListViewModel {
     private(set) var isLoading = false
     
     @Published
-    private var indexesToReload: [IndexPath]
-    
-    @Published
     private(set) var snapshot: DataSourceSnapshot
     private var cancellables: Set<AnyCancellable>
     
@@ -36,28 +33,11 @@ class ShowListViewModel {
     
     init(showDAO: ShowDAO, imageDAO: ImageDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
         self.snapshot = DataSourceSnapshot()
-        self.indexesToReload = []
         self.cancellables = Set()
         
         self.showDAO = showDAO
         self.imageDAO = imageDAO
         self.router = router
-        
-        $indexesToReload
-            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-            .compactMap { [weak self] indexesToReload in
-                guard let self = self else { return nil }
-                let values = indexesToReload.map { indexPath -> ShowCellViewModel in
-                    self.snapshot.itemIdentifiers[indexPath.row]
-                }
-                
-                return !values.isEmpty ? Array(Set(values)) : nil
-            }
-            .sink { [weak self] (items: [ShowCellViewModel]) in
-                self?.snapshot.reloadItems(items)
-                self?.indexesToReload = []
-            }
-            .store(in: &cancellables)
     }
     
     @MainActor private func fetchContent() {
@@ -66,7 +46,7 @@ class ShowListViewModel {
         Task {
             do {
                 let shows = try await showDAO.fetchMany(page: page).map { show in
-                    return ShowCellViewModel(from: show, imageDAO: imageDAO)
+                    return ShowCellViewModel(from: show)
                 }
                 
                 page += 1
@@ -89,10 +69,6 @@ extension ShowListViewModel {
         router.trigger(.showDetail(item.show))
     }
     
-    func reloadItem(at indexPath: IndexPath) {
-        indexesToReload.append(indexPath)
-    }
-    
     @MainActor
     func configureInitialContent() {
         snapshot.appendSections([.showList])
@@ -101,16 +77,6 @@ extension ShowListViewModel {
     
     @MainActor
     func prefetchItems(at indexes: [IndexPath]) {
-        indexes.forEach { indexPath in
-            guard indexPath.row < snapshot.itemIdentifiers.count else { return }
-            let item = snapshot.itemIdentifiers[indexPath.row]
-            Task {
-                guard item.poster == nil else { return }
-                await item.loadPoster()
-                reloadItem(at: indexPath)
-            }
-        }
-        
         if let last = indexes.last?.row, last > snapshot.itemIdentifiers.count - 50 {
             fetchContent()
         }

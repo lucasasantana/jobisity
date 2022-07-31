@@ -17,9 +17,7 @@ class ShowListViewController: UIViewController {
     
     lazy var cellRegistration: ShowCellRegistration = {
         ShowCellRegistration { cell, indexPath, cellViewModel in
-            cell.setup(with: cellViewModel) { [weak self] in
-                self?.viewModel.reloadItem(at: indexPath)
-            }
+            cell.setup(with: cellViewModel)
         }
     }()
     

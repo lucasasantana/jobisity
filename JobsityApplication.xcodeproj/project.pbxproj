@@ -27,6 +27,7 @@
 		CD78812D289606530085B0F5 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */; };
 		CD7881302896C2000085B0F5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78812F2896C2000085B0F5 /* AsyncImage.swift */; };
 		CD7881332896C2C80085B0F5 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = CD7881322896C2C80085B0F5 /* SkeletonView */; };
+		CD7881352896C7B40085B0F5 /* NSMutableAttributedString+trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -75,6 +76,7 @@
 		CD788128289603C40085B0F5 /* ShowDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewModel.swift; sourceTree = "<group>"; };
 		CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
 		CD78812F2896C2000085B0F5 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+trim.swift"; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				CD6528632895AAF30048ACEA /* UILabel+HTML.swift */,
+				CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				CD78812D289606530085B0F5 /* EpisodeDetailViewController.swift in Sources */,
 				CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */,
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
+				CD7881352896C7B40085B0F5 /* NSMutableAttributedString+trim.swift in Sources */,
 				CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */,
 				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
 				CD7881252895E3C90085B0F5 /* EpisodesHeader.swift in Sources */,

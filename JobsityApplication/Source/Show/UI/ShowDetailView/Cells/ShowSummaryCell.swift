@@ -25,7 +25,7 @@ class ShowSummaryCellContentView: UIView, UIContentView {
     lazy var rootStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = 16
         return stackView
     }()
     
@@ -78,7 +78,8 @@ extension ShowSummaryCellContentView: ViewCodable {
         
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentHuggingPriority(.required, for: .vertical)
+        summaryLabel.setContentHuggingPriority(.required, for: .vertical)
         
         NSLayoutConstraint.activate {
             rootStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.verticalPadding)
