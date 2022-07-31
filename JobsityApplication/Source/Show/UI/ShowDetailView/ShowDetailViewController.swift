@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class ShowDetailViewController: UIViewController {
+class ShowDetailViewController: UICollectionViewController {
     
     typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailViewModel.Section, ShowDetailViewModel.Cell>
     
@@ -35,12 +35,6 @@ class ShowDetailViewController: UIViewController {
         }
         
         return layout
-    }()
-    
-    lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        return collectionView
     }()
     
     lazy var showInformationCellRegistration: ShowInformationCellRegistration = {
@@ -143,7 +137,7 @@ class ShowDetailViewController: UIViewController {
     
     init(viewModel: ShowDetailViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {
@@ -151,7 +145,8 @@ class ShowDetailViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = collectionView
+        super.loadView()
+        collectionView.collectionViewLayout = layout
     }
     
     override func viewDidLoad() {
@@ -170,13 +165,13 @@ class ShowDetailViewController: UIViewController {
     }
 }
 
-extension ShowDetailViewController: UICollectionViewDelegate {
+extension ShowDetailViewController {
     
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         viewModel.shouldSelect(at: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else {
             return
         }
@@ -184,13 +179,13 @@ extension ShowDetailViewController: UICollectionViewDelegate {
         viewModel.handleCellSelection(cell: item)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (cell as? ShowInformationCell) != nil {
             self.title = nil
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (cell as? ShowInformationCell) != nil {
             self.title = self.viewModel.title
         }

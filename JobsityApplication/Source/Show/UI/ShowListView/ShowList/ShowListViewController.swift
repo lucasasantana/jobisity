@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class ShowListViewController: UIViewController {
+class ShowListViewController: UICollectionViewController {
     
     typealias DataSource = UICollectionViewDiffableDataSource<ShowListViewModel.Section, ShowCellViewModel>
     typealias ShowCellRegistration = UICollectionView.CellRegistration<ShowCell, ShowCellViewModel>
@@ -32,24 +32,12 @@ class ShowListViewController: UIViewController {
     
     // MARK: Collection View configuration
     
-    lazy var collectionView: UICollectionView = {
-        let listConfiguration = UICollectionLayoutListConfiguration.init(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.prefetchDataSource = self
-        collectionView.delegate = self
-        
-        return collectionView
-    }()
-    
-    
     let viewModel: ShowListViewModel
     lazy var cancellables = Set<AnyCancellable>()
     
     init(viewModel: ShowListViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
         self.title = viewModel.sceneTitle
     }
     
@@ -58,7 +46,8 @@ class ShowListViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = collectionView
+        super.loadView()
+        configureCollection()
     }
     
     override func viewDidLoad() {
@@ -69,6 +58,14 @@ class ShowListViewController: UIViewController {
         .store(in: &cancellables)
         viewModel.configureInitialContent()
     }
+    
+    func configureCollection() {
+        let listConfiguration = UICollectionLayoutListConfiguration.init(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
+        
+        collectionView.prefetchDataSource = self
+        collectionView.collectionViewLayout = layout
+    }
 }
 
 extension ShowListViewController: UICollectionViewDataSourcePrefetching {
@@ -77,8 +74,8 @@ extension ShowListViewController: UICollectionViewDataSourcePrefetching {
     }
 }
 
-extension ShowListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension ShowListViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.handleItemSelected(at: indexPath)
     }
 }

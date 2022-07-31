@@ -9,8 +9,24 @@ import UIKit
 import Kingfisher
 
 class EpisodeDetailViewModel {
+    
+    var title: String {
+        episode.name
+    }
+    
+    var seasonAndNumber: String {
+        "Season \(episode.season), Episode \(episode.number)"
+    }
+    
+    var posterURL: URL? {
+        episode.poster?.medium
+    }
+    
+    var summary: String? {
+        episode.summary
+    }
    
-    let episode: Episode
+    private let episode: Episode
     
     init(episode: Episode) {
         self.episode = episode
@@ -49,14 +65,21 @@ class EpisodeDetailViewController: UIViewController {
     
     lazy var episodeTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.episode.name
+        label.text = viewModel.title
         label.numberOfLines = .zero
+        return label
+    }()
+    
+    lazy var seasonAndNumberLabel: UILabel = {
+        let label = UILabel()
+        label.text = viewModel.seasonAndNumber
+        label.numberOfLines = 1
         return label
     }()
     
     lazy var sumaryLabel: UILabel = {
         let label = UILabel()
-        label.setHTMLFromString(htmlText: viewModel.episode.summary)
+        label.setHTMLFromString(htmlText: viewModel.summary)
         label.numberOfLines = .zero
         return label
     }()
@@ -80,12 +103,16 @@ class EpisodeDetailViewController: UIViewController {
 extension EpisodeDetailViewController: ViewCodable  {
     func setupViewHierarchy() {
         view.addSubview(contentScrollView)
+        
         contentScrollView.addSubview(contentView)
         contentView.addSubview(rootStackView)
         
         rootStackView.addArrangedSubview(episodeTitleLabel)
+        rootStackView.addArrangedSubview(seasonAndNumberLabel)
         rootStackView.addArrangedSubview(posterImageView)
         rootStackView.addArrangedSubview(sumaryLabel)
+        
+        rootStackView.setCustomSpacing(4, after: episodeTitleLabel)
     }
     
     func setupConstraints() {
@@ -122,8 +149,9 @@ extension EpisodeDetailViewController: ViewCodable  {
         view.backgroundColor = .systemBackground
         
         episodeTitleLabel.font = .boldSystemFont(ofSize: 24)
+        seasonAndNumberLabel.font = .systemFont(ofSize: 16)
         
-        if let imageURL = viewModel.episode.poster?.medium {
+        if let imageURL = viewModel.posterURL {
             posterImageView.imageURL = imageURL
         } else {
             posterImageView.isHidden = true
