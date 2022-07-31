@@ -97,6 +97,7 @@ class EpisodeDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupAppearance()
+        navigationItem.largeTitleDisplayMode = .never
     }
 }
 

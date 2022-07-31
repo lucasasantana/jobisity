@@ -90,6 +90,9 @@ extension ShowListViewController {
 
 extension ShowListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        viewModel.handleSearch(searchText: searchController.searchBar.text)
+        viewModel.handleSearch(
+            searchText: searchController.searchBar.text,
+            isSearchActive: searchController.isActive
+        )
     }
 }

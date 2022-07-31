@@ -102,8 +102,9 @@ extension ShowListViewModel {
     }
     
     func beginSearch() {
+        isSearchActive = true
         searchCancellable = $searchText
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.2), scheduler: DispatchQueue.main)
             .compactMap { [weak self] value in
                 guard let value = value, !value.isEmpty else {
                     self?.snapshot.deleteItems(self?.snapshot.itemIdentifiers ?? [])
@@ -123,17 +124,28 @@ extension ShowListViewModel {
             .compactMap { shows -> [ShowCellViewModel]? in
                 return shows.map { ShowCellViewModel(from: $0)}
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 self?.snapshot.deleteItems(self?.snapshot.itemIdentifiers ?? [])
                 self?.snapshot.appendItems(result, toSection: .showList)
             })
     }
     
-    func handleSearch(searchText: String?) {
-        guard self.searchText != searchText else { return }
-        if searchCancellable == nil {
+    func endSearch() {
+        isSearchActive = false
+        searchCancellable = nil
+        snapshot.deleteItems(snapshot.itemIdentifiers)
+        snapshot.appendItems(shows, toSection: .showList)
+    }
+    
+    func handleSearch(searchText: String?, isSearchActive: Bool) {
+        if !self.isSearchActive && isSearchActive {
             beginSearch()
+        } else if self.isSearchActive && !isSearchActive {
+            endSearch()
         }
+        
+        guard isSearchActive, self.searchText != searchText else { return }
         self.searchText = searchText
     }
     
@@ -145,7 +157,7 @@ extension ShowListViewModel {
     
     @MainActor
     func prefetchItems(at indexes: [IndexPath]) {
-        if let last = indexes.last?.row, last > snapshot.itemIdentifiers.count - 50 {
+        if !isSearchActive, let last = indexes.last?.row, last > snapshot.itemIdentifiers.count - 50 {
             fetchContent()
         }
     }

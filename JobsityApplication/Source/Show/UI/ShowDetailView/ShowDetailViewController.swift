@@ -176,6 +176,7 @@ class ShowDetailViewController: UICollectionViewController {
         dataSource.apply(viewModel.configureInitialContent())
         
         navigationItem.backButtonTitle = viewModel.title
+        navigationItem.largeTitleDisplayMode = .never
     }
 }
 
