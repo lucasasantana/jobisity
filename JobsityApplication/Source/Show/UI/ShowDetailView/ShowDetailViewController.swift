@@ -64,6 +64,7 @@ class ShowDetailViewController: UIViewController {
             var config = cell.defaultContentConfiguration()
             config.text = episode.name
             cell.contentConfiguration = config
+            cell.accessories = [.disclosureIndicator()]
         }
     }()
     
@@ -164,6 +165,8 @@ class ShowDetailViewController: UIViewController {
             .store(in: &cancellables)
 
         dataSource.apply(viewModel.configureInitialContent())
+        
+        navigationItem.backButtonTitle = viewModel.title
     }
 }
 
@@ -179,5 +182,17 @@ extension ShowDetailViewController: UICollectionViewDelegate {
         }
         
         viewModel.handleCellSelection(cell: item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (cell as? ShowInformationCell) != nil {
+            self.title = nil
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (cell as? ShowInformationCell) != nil {
+            self.title = self.viewModel.title
+        }
     }
 }

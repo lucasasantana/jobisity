@@ -26,6 +26,10 @@ class ShowDetailViewModel {
         case episode(Episode)
     }
     
+    var title: String {
+        show.name
+    }
+    
     let show: Show
     private var seasons: [Season]
     
