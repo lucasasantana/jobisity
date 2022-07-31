@@ -23,6 +23,10 @@
 		CD7881202895D82E0085B0F5 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78811F2895D82E0085B0F5 /* Episode.swift */; };
 		CD7881222895D8F90085B0F5 /* EpisodesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */; };
 		CD7881252895E3C90085B0F5 /* EpisodesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881242895E3C90085B0F5 /* EpisodesHeader.swift */; };
+		CD788129289603C40085B0F5 /* ShowDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD788128289603C40085B0F5 /* ShowDetailViewModel.swift */; };
+		CD78812D289606530085B0F5 /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */; };
+		CD7881302896C2000085B0F5 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78812F2896C2000085B0F5 /* AsyncImage.swift */; };
+		CD7881332896C2C80085B0F5 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = CD7881322896C2C80085B0F5 /* SkeletonView */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -68,6 +72,9 @@
 		CD78811F2895D82E0085B0F5 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesAdapter.swift; sourceTree = "<group>"; };
 		CD7881242895E3C90085B0F5 /* EpisodesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesHeader.swift; sourceTree = "<group>"; };
+		CD788128289603C40085B0F5 /* ShowDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewModel.swift; sourceTree = "<group>"; };
+		CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
+		CD78812F2896C2000085B0F5 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7881332896C2C80085B0F5 /* SkeletonView in Frameworks */,
 				CD65284B28956D6D0048ACEA /* XCoordinatorCombine in Frameworks */,
 				CD65284928956D6D0048ACEA /* XCoordinator in Frameworks */,
 				CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */,
@@ -128,6 +136,7 @@
 				CD7881232895E3BB0085B0F5 /* Headers */,
 				CD652853289585780048ACEA /* Cells */,
 				CD652851289583960048ACEA /* ShowDetailViewController.swift */,
+				CD788128289603C40085B0F5 /* ShowDetailViewModel.swift */,
 			);
 			path = ShowDetailView;
 			sourceTree = "<group>";
@@ -168,6 +177,7 @@
 		CD7881122895D4FA0085B0F5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CD78812E2896C1E30085B0F5 /* UI */,
 				CDF504922894B33C008A0191 /* ImageDAO.swift */,
 			);
 			path = Image;
@@ -176,6 +186,7 @@
 		CD7881132895D5120085B0F5 /* Episodes */ = {
 			isa = PBXGroup;
 			children = (
+				CD78812B289606320085B0F5 /* UI */,
 				CD7881182895D58B0085B0F5 /* Model */,
 				CD7881142895D52A0085B0F5 /* DAO */,
 				CD7881212895D8F90085B0F5 /* EpisodesAdapter.swift */,
@@ -223,6 +234,22 @@
 				CD7881242895E3C90085B0F5 /* EpisodesHeader.swift */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		CD78812B289606320085B0F5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CD78812E2896C1E30085B0F5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CD78812F2896C2000085B0F5 /* AsyncImage.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
@@ -403,8 +430,8 @@
 		CDF5048A289492AB008A0191 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				CD65285028957C6A0048ACEA /* ShowDetailView */,
 				CDF5048B289492B9008A0191 /* ShowListView */,
+				CD65285028957C6A0048ACEA /* ShowDetailView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -438,6 +465,7 @@
 				CDF5048F2894AEDD008A0191 /* Kingfisher */,
 				CD65284828956D6D0048ACEA /* XCoordinator */,
 				CD65284A28956D6D0048ACEA /* XCoordinatorCombine */,
+				CD7881322896C2C80085B0F5 /* SkeletonView */,
 			);
 			productName = JobsityApplication;
 			productReference = CDF50444289481A1008A0191 /* JobsityApplication.app */;
@@ -470,6 +498,7 @@
 			packageReferences = (
 				CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */,
+				CD7881312896C2C80085B0F5 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = CDF50445289481A1008A0191 /* Products */;
 			projectDirPath = "";
@@ -509,6 +538,7 @@
 				CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */,
 				CD7881202895D82E0085B0F5 /* Episode.swift in Sources */,
 				CDF5047728948A46008A0191 /* NetworkManager.swift in Sources */,
+				CD788129289603C40085B0F5 /* ShowDetailViewModel.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
 				CDF5044C289481A1008A0191 /* ViewController.swift in Sources */,
@@ -518,11 +548,13 @@
 				CDF5047428948A46008A0191 /* HTTPMethod.swift in Sources */,
 				CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */,
 				CDF5047928948A46008A0191 /* URLParameterEncoder.swift in Sources */,
+				CD78812D289606530085B0F5 /* EpisodeDetailViewController.swift in Sources */,
 				CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */,
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
 				CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */,
 				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
 				CD7881252895E3C90085B0F5 /* EpisodesHeader.swift in Sources */,
+				CD7881302896C2000085B0F5 /* AsyncImage.swift in Sources */,
 				CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */,
 				CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */,
 				CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */,
@@ -755,6 +787,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CD7881312896C2C80085B0F5 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -775,6 +815,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */;
 			productName = XCoordinatorCombine;
+		};
+		CD7881322896C2C80085B0F5 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD7881312896C2C80085B0F5 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		CDF5048F2894AEDD008A0191 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

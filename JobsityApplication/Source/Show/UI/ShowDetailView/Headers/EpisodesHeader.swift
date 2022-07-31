@@ -9,13 +9,6 @@ import UIKit
 
 class EpisodesHeader: UICollectionReusableView {
     
-    lazy var rootStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        return stackView
-    }()
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1
@@ -41,18 +34,17 @@ class EpisodesHeader: UICollectionReusableView {
 extension EpisodesHeader: ViewCodable {
     
     func setupViewHierarchy() {
-        addSubview(rootStackView)
-        rootStackView.addArrangedSubview(titleLabel)
+        addSubview(titleLabel)
     }
     
     func setupConstraints() {
-        rootStackView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate {
-            rootStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor)
-            rootStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
-            rootStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 16)
-            rootStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -16)
+            titleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor)
+            titleLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 16)
+            titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -16)
         }
     }
 }

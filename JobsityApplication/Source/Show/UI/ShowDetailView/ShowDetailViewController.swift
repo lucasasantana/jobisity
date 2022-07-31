@@ -8,78 +8,6 @@
 import Combine
 import UIKit
 
-class ShowDetailViewModel {
-    
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Cell>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Cell>
-    
-    enum Section: Hashable {
-        case information
-        case episodes
-    }
-    
-    enum Cell: Hashable {
-        case info
-        case summary
-        case season(Int)
-        case episode(Episode)
-    }
-    
-    let show: Show
-    private var seasons: [Season]
-    
-    var episodesSectionSnapshotPublisher: AnyPublisher<SectionSnapshot, Never> {
-        return episodesSectionSnapshotSubject.eraseToAnyPublisher()
-    }
-    
-    private let episodesSectionSnapshotSubject: PassthroughSubject<SectionSnapshot, Never>
-    
-    private let episodesDAO: EpisodeDAO
-    
-    init(show: Show, episodesDAO: EpisodeDAO) {
-        self.episodesSectionSnapshotSubject = PassthroughSubject()
-        self.seasons = []
-        
-        self.show = show
-        self.episodesDAO = episodesDAO
-    }
-    
-    @MainActor
-    func configureInitialContent() -> DataSourceSnapshot {
-        var snapshot = DataSourceSnapshot()
-        snapshot.appendSections([.information, .episodes])
-        snapshot.appendItems([.info, .summary], toSection: .information)
-        
-        loadEpisodes()
-        
-        return snapshot
-    }
-    
-    @MainActor
-    func loadEpisodes() {
-        Task {
-            let episodes = try await episodesDAO.fetchAll(fromShowWithID: show.id)
-            seasons = EpisodesAdapter.groupEpisodesBySeason(episodes)
-                        
-            let seasonItems = seasons.map { Cell.season($0.number) }
-            
-            var sectionSnapshot = SectionSnapshot()
-            sectionSnapshot.append(seasonItems)
-            
-            for season in seasons {
-                let episodes = season.episodes.map { Cell.episode($0) }
-                sectionSnapshot.append(episodes, to: .season(season.number))
-            }
-                
-            episodesSectionSnapshotSubject.send(sectionSnapshot)
-        }
-    }
-    
-    func seasonNumber(at indexPath: IndexPath) -> Int {
-        return indexPath.section
-    }
-}
-
 class ShowDetailViewController: UIViewController {
     
     typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailViewModel.Section, ShowDetailViewModel.Cell>
@@ -111,6 +39,7 @@ class ShowDetailViewController: UIViewController {
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -235,5 +164,20 @@ class ShowDetailViewController: UIViewController {
             .store(in: &cancellables)
 
         dataSource.apply(viewModel.configureInitialContent())
+    }
+}
+
+extension ShowDetailViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        viewModel.shouldSelect(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        viewModel.handleCellSelection(cell: item)
     }
 }
