@@ -5,9 +5,14 @@
 //  Created by Lucas Antevere Santana on 29/07/22.
 //
 
+import Combine
 import Foundation
 
 class ShowNetworkDAO: ShowDAO {
+    
+    static let shared: ShowNetworkDAO = ShowNetworkDAO()
+    
+    let favoritesSubject: PassthroughSubject<Void, Never>
     
     let manager: NetworkManager
     let baseURL: URL
@@ -15,9 +20,14 @@ class ShowNetworkDAO: ShowDAO {
     @UserDefault(key: .favorites, defaultValue: [])
     var favoritesShowsIDs: [Int]
     
+    var favoritesDidChange: AnyPublisher<Void, Never> {
+        favoritesSubject.eraseToAnyPublisher()
+    }
+    
     init(manager: NetworkManager = NetworkManager()) {
         self.manager = manager
         self.baseURL = URL(string: "https://api.tvmaze.com")!
+        self.favoritesSubject = PassthroughSubject()
     }
     
     func searchMany(query: String) async throws -> [Show] {
@@ -35,11 +45,18 @@ class ShowNetworkDAO: ShowDAO {
     }
     
     func markAsFavorite(show: Show) {
-        favoritesShowsIDs.append(show.id)
+        var favorites = favoritesShowsIDs
+        favorites.append(show.id)
+        
+        let values = Set(favorites)
+        favoritesShowsIDs = Array(values)
+        
+        favoritesSubject.send()
     }
     
     func removeFromFavorites(show: Show) {
         favoritesShowsIDs.removeAll(where: { $0 == show.id })
+        favoritesSubject.send()
     }
     
     func loadFavorites() async throws -> [Show] {

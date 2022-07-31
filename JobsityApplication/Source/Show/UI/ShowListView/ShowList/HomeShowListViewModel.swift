@@ -9,36 +9,10 @@ import Combine
 import UIKit
 import XCoordinator
 
-extension Publisher {
-    func asyncMap<T>(
-        _ transform: @escaping (Output) async throws -> T
-    ) -> Publishers.FlatMap<Future<T, Error>,Publishers.SetFailureType<Self, Error>> {
-        flatMap { value in
-            Future { promise in
-                Task {
-                    do {
-                        let output = try await transform(value)
-                        promise(.success(output))
-                    } catch {
-                        promise(.failure(error))
-                    }
-                }
-            }
-        }
-    }
-}
-
-class ShowListViewModel {
-    
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, ShowCellViewModel>
-    
-    enum Section {
-        case showList
-    }
+class HomeShowListViewModel: ShowListViewModelProtocol {
     
     private var page: Int = 1
     private let showDAO: ShowDAO
-    private let imageDAO: ImageDAO
     
     let sceneTitle = "Shows"
     
@@ -57,20 +31,26 @@ class ShowListViewModel {
     private var searchCancellable: AnyCancellable?
     
     @Published
-    private(set) var snapshot: DataSourceSnapshot
-   
-    
+    private(set) var snapshot: ShowListDataSourceSnapshot
+
     private let router: UnownedRouter<ShowsCoordinator.Routes>
     
-    init(isSearchEnabled: Bool, showDAO: ShowDAO, imageDAO: ImageDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
-        self.snapshot = DataSourceSnapshot()
+    var snapshotPublisher: AnyPublisher<ShowListDataSourceSnapshot, Never> {
+        $snapshot.eraseToAnyPublisher()
+    }
+    
+    init(isSearchEnabled: Bool, showDAO: ShowDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
+        self.snapshot = ShowListDataSourceSnapshot()
         self.shows = []
         self.searchedShows = []
         
         self.showDAO = showDAO
-        self.imageDAO = imageDAO
         self.router = router
         self.isSearchEnabled = isSearchEnabled
+    }
+    
+    func reloadContentIfNeeded() {
+        /* Not implemented */
     }
     
     @MainActor private func fetchContent() {
@@ -93,7 +73,7 @@ class ShowListViewModel {
     }
 }
 
-extension ShowListViewModel {
+extension HomeShowListViewModel {
     
     func handleItemSelected(at indexPath: IndexPath) {
         guard indexPath.row < snapshot.itemIdentifiers.count else { return }

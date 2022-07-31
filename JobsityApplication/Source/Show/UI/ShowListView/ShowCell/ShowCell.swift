@@ -102,7 +102,6 @@ class ShowCell: UICollectionViewListCell {
         
         contentConfiguration = config
         
-        let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .automatic)
-        accessories = [.outlineDisclosure(options: headerDisclosureOption)]
+        accessories = [.disclosureIndicator()]
     }
 }

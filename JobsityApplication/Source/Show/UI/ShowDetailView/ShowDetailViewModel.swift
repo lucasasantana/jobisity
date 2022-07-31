@@ -47,9 +47,12 @@ class ShowDetailViewModel {
     private let episodesDAO: EpisodeDAO
     private let router: UnownedRouter<ShowsCoordinator.Routes>
     
+    private var cancellables: Set<AnyCancellable>
+    
     init(show: Show, showDAO: ShowDAO, episodesDAO: EpisodeDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
         self.episodesSectionSnapshotSubject = PassthroughSubject()
         self.seasons = []
+        self.cancellables = Set()
         self.isFavorite = showDAO.isFavorite(show)
         
         self.show = show
@@ -64,8 +67,6 @@ class ShowDetailViewModel {
         } else {
             showDAO.markAsFavorite(show: show)
         }
-        
-        isFavorite.toggle()
     }
     
     @MainActor
@@ -75,6 +76,19 @@ class ShowDetailViewModel {
         snapshot.appendItems([.info, .summary, .genres], toSection: .information)
         
         loadEpisodes()
+        
+        showDAO
+            .favoritesDidChange
+            .compactMap { [weak self] () -> Bool? in
+                guard let self = self else { return nil }
+                return self.showDAO.isFavorite(self.show)
+            }
+            .sink { [weak self] (isFavorite: Bool) in
+                guard let self = self else { return }
+                self.isFavorite = isFavorite
+            }
+            .store(in: &cancellables)
+        
         
         return snapshot
     }

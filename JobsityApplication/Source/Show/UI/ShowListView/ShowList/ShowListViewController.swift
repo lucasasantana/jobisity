@@ -8,11 +8,29 @@
 import Combine
 import UIKit
 
+typealias ShowListDataSourceSnapshot = NSDiffableDataSourceSnapshot<ShowListSection, ShowCellViewModel>
+
+enum ShowListSection {
+    case showList
+}
+
+protocol ShowListViewModelProtocol {
+    var sceneTitle: String { get }
+    var isSearchEnabled: Bool { get }
+    var snapshotPublisher: AnyPublisher<ShowListDataSourceSnapshot, Never> { get }
+    
+    func configureInitialContent()
+    func reloadContentIfNeeded()
+    func prefetchItems(at indexes: [IndexPath])
+    func handleItemSelected(at indexPath: IndexPath)
+    func handleSearch(searchText: String?, isSearchActive: Bool)
+}
+
 class ShowListViewController: UICollectionViewController {
     
     lazy var seachController = UISearchController()
     
-    typealias DataSource = UICollectionViewDiffableDataSource<ShowListViewModel.Section, ShowCellViewModel>
+    typealias DataSource = UICollectionViewDiffableDataSource<ShowListSection, ShowCellViewModel>
     typealias ShowCellRegistration = UICollectionView.CellRegistration<ShowCell, ShowCellViewModel>
     
     // MARK: Collection View DataSource configuration
@@ -34,10 +52,10 @@ class ShowListViewController: UICollectionViewController {
     
     // MARK: Collection View configuration
     
-    let viewModel: ShowListViewModel
+    let viewModel: ShowListViewModelProtocol
     lazy var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: ShowListViewModel) {
+    init(viewModel: ShowListViewModelProtocol) {
         self.viewModel = viewModel
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         self.title = viewModel.sceneTitle
@@ -54,7 +72,7 @@ class ShowListViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.$snapshot.sink { [weak self] snapshot in
+        viewModel.snapshotPublisher.sink { [weak self] snapshot in
             self?.dataSource.apply(snapshot, animatingDifferences: true)
         }
         .store(in: &cancellables)
@@ -65,6 +83,11 @@ class ShowListViewController: UICollectionViewController {
             navigationItem.searchController = seachController
             seachController.searchResultsUpdater = self
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.reloadContentIfNeeded()
     }
     
     func configureCollection() {
