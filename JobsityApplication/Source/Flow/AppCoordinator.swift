@@ -6,14 +6,23 @@
 //
 
 import Foundation
-
 import XCoordinator
+
+extension Transition {
+    
+    static func presentFullScreen(_ presentable: Presentable, animation: Animation? = nil) -> Transition {
+        presentable.viewController?.modalPresentationStyle = .fullScreen
+        return .present(presentable, animation: animation)
+    }
+}
 
 class AppCoordinator: NavigationCoordinator<AppCoordinator.AppRoute> {
     
     enum AppRoute: Route {
         case content
     }
+    
+    lazy var homeCoordinator = HomeCoordinator()
     
     init() {
         super.init(initialRoute: .content)
@@ -22,8 +31,7 @@ class AppCoordinator: NavigationCoordinator<AppCoordinator.AppRoute> {
     override func prepareTransition(for route: AppRoute) -> NavigationTransition {
         switch route {
             case .content:
-                addChild(ShowsCoordinator(rootViewController: rootViewController))
-                return .none()
+                return .presentFullScreen(homeCoordinator)
         }
     }
 }

@@ -14,6 +14,7 @@ class ShowDetailViewController: UICollectionViewController {
     
     typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, ShowDetailViewModel.Cell>
     typealias ShowSummaryCellRegistration = UICollectionView.CellRegistration<ShowSummaryCell, ShowDetailViewModel.Cell>
+    typealias ShowGenreCellRegistration = UICollectionView.CellRegistration<ShowGenresCell, ShowDetailViewModel.Cell>
     typealias EpisodeCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailViewModel.Cell>
     typealias SeasonCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailViewModel.Cell>
     
@@ -45,6 +46,12 @@ class ShowDetailViewController: UICollectionViewController {
     
     lazy var showSummaryCellRegistration: ShowSummaryCellRegistration = {
         ShowSummaryCellRegistration { [unowned self] cell, indexPath, _ in
+            cell.setup(withShow: self.viewModel.show)
+        }
+    }()
+    
+    lazy var showGenresCellRegistration: ShowGenreCellRegistration = {
+        ShowGenreCellRegistration { [unowned self] cell, indexPath, _ in
             cell.setup(withShow: self.viewModel.show)
         }
     }()
@@ -88,6 +95,7 @@ class ShowDetailViewController: UICollectionViewController {
     lazy var dataSource: DataSource = {
         let showInformationCellRegistration = showInformationCellRegistration
         let showSummaryCellRegistration = showSummaryCellRegistration
+        let showGenresCellRegistration = showGenresCellRegistration
         let espisodeCellRegistration = episodeCellRegistration
         let seasonCellRegistration = seasonCellRegistration
         
@@ -104,6 +112,12 @@ class ShowDetailViewController: UICollectionViewController {
                 case .summary:
                     return collectionView.dequeueConfiguredReusableCell(
                         using: showSummaryCellRegistration,
+                        for: indexPath,
+                        item: cell
+                    )
+                case .genres:
+                    return collectionView.dequeueConfiguredReusableCell(
+                        using: showGenresCellRegistration,
                         for: indexPath,
                         item: cell
                     )

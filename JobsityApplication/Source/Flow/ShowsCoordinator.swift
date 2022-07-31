@@ -17,8 +17,10 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
         case episodeDetail(Episode)
     }
     
-    init(rootViewController: RootViewController) {
-        super.init(rootViewController: rootViewController, initialRoute: .showList)
+    init() {
+        super.init(initialRoute: .showList)
+        rootViewController.tabBarItem.image = UIImage(systemName: "house")
+        rootViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
     }
     
     override func prepareTransition(for route: Routes) -> NavigationTransition {

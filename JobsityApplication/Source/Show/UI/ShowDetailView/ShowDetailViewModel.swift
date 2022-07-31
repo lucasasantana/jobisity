@@ -22,6 +22,7 @@ class ShowDetailViewModel {
     enum Cell: Hashable {
         case info
         case summary
+        case genres
         case season(Int)
         case episode(Episode)
     }
@@ -55,7 +56,7 @@ class ShowDetailViewModel {
     func configureInitialContent() -> DataSourceSnapshot {
         var snapshot = DataSourceSnapshot()
         snapshot.appendSections([.information, .episodes])
-        snapshot.appendItems([.info, .summary], toSection: .information)
+        snapshot.appendItems([.info, .summary, .genres], toSection: .information)
         
         loadEpisodes()
         
