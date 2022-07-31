@@ -36,12 +36,12 @@ struct Schedule: Decodable {
 struct Show {
     let id: Int
     let name: String
-    let poster: Poster
+    let poster: Poster?
     
     let genres: [String]
     let schedule: Schedule
     
-    let summary: String
+    let summary: String?
 }
 
 extension Show: Decodable {

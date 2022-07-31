@@ -10,6 +10,8 @@ import UIKit
 
 class ShowListViewController: UICollectionViewController {
     
+    lazy var seachController = UISearchController()
+    
     typealias DataSource = UICollectionViewDiffableDataSource<ShowListViewModel.Section, ShowCellViewModel>
     typealias ShowCellRegistration = UICollectionView.CellRegistration<ShowCell, ShowCellViewModel>
     
@@ -57,12 +59,18 @@ class ShowListViewController: UICollectionViewController {
         }
         .store(in: &cancellables)
         viewModel.configureInitialContent()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        if viewModel.isSearchEnabled {
+            navigationItem.searchController = seachController
+            seachController.searchResultsUpdater = self
+        }
     }
     
     func configureCollection() {
         let listConfiguration = UICollectionLayoutListConfiguration.init(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
-        
+    
         collectionView.prefetchDataSource = self
         collectionView.collectionViewLayout = layout
     }
@@ -77,5 +85,11 @@ extension ShowListViewController: UICollectionViewDataSourcePrefetching {
 extension ShowListViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.handleItemSelected(at: indexPath)
+    }
+}
+
+extension ShowListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel.handleSearch(searchText: searchController.searchBar.text)
     }
 }

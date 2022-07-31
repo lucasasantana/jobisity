@@ -153,7 +153,7 @@ extension ShowInformationCellContentView: ViewCodable {
 struct ShowInformationCellContentConfiguration: UIContentConfiguration {
     
     let title: String
-    let imageURL: URL
+    let imageURL: URL?
         
     let days: [String]
     let time: String
@@ -171,7 +171,7 @@ class ShowInformationCell: UICollectionViewListCell {
     func setup(withShow show: Show) {
         let config = ShowInformationCellContentConfiguration(
             title: show.name,
-            imageURL: show.poster.medium,
+            imageURL: show.poster?.medium,
             days: show.schedule.days.map { $0.rawValue },
             time: show.schedule.time
         )

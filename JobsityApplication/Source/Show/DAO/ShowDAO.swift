@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ShowDAO {
+    func searchMany(query: String) async throws -> [Show]
     func fetchMany(page: Int?) async throws -> [Show]
 }
 

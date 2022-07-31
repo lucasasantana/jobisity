@@ -17,8 +17,8 @@ class ShowCellViewModel: Hashable {
         show.name
     }
     
-    var poster: URL {
-        show.poster.medium
+    var poster: URL? {
+        show.poster?.medium
     }
     
     let show: Show

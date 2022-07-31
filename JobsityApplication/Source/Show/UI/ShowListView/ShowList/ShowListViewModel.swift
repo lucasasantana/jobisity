@@ -9,6 +9,25 @@ import Combine
 import UIKit
 import XCoordinator
 
+extension Publisher {
+    func asyncMap<T>(
+        _ transform: @escaping (Output) async throws -> T
+    ) -> Publishers.FlatMap<Future<T, Error>,Publishers.SetFailureType<Self, Error>> {
+        flatMap { value in
+            Future { promise in
+                Task {
+                    do {
+                        let output = try await transform(value)
+                        promise(.success(output))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        }
+    }
+}
+
 class ShowListViewModel {
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, ShowCellViewModel>
@@ -24,20 +43,34 @@ class ShowListViewModel {
     let sceneTitle = "Shows"
     
     private(set) var isLoading = false
+    private(set) var isSearchEnabled: Bool
+    
+    
+    private var shows: [ShowCellViewModel]
+    
+    // Search
+    private var isSearchActive: Bool = false
+    
+    @Published
+    private var searchText: String?
+    private var searchedShows: [Show]
+    private var searchCancellable: AnyCancellable?
     
     @Published
     private(set) var snapshot: DataSourceSnapshot
-    private var cancellables: Set<AnyCancellable>
+   
     
     private let router: UnownedRouter<ShowsCoordinator.Routes>
     
-    init(showDAO: ShowDAO, imageDAO: ImageDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
+    init(isSearchEnabled: Bool, showDAO: ShowDAO, imageDAO: ImageDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
         self.snapshot = DataSourceSnapshot()
-        self.cancellables = Set()
+        self.shows = []
+        self.searchedShows = []
         
         self.showDAO = showDAO
         self.imageDAO = imageDAO
         self.router = router
+        self.isSearchEnabled = isSearchEnabled
     }
     
     @MainActor private func fetchContent() {
@@ -50,6 +83,7 @@ class ShowListViewModel {
                 }
                 
                 page += 1
+                self.shows.append(contentsOf: shows)
                 snapshot.appendItems(shows, toSection: .showList)
                 isLoading = false
             } catch {
@@ -57,8 +91,6 @@ class ShowListViewModel {
             }
         }
     }
-    
-    
 }
 
 extension ShowListViewModel {
@@ -67,6 +99,42 @@ extension ShowListViewModel {
         guard indexPath.row < snapshot.itemIdentifiers.count else { return }
         let item = snapshot.itemIdentifiers[indexPath.row]
         router.trigger(.showDetail(item.show))
+    }
+    
+    func beginSearch() {
+        searchCancellable = $searchText
+            .debounce(for: 0.2, scheduler: DispatchQueue.main)
+            .compactMap { [weak self] value in
+                guard let value = value, !value.isEmpty else {
+                    self?.snapshot.deleteItems(self?.snapshot.itemIdentifiers ?? [])
+                    self?.snapshot.appendItems(self?.shows ?? [], toSection: .showList)
+                    return nil
+                }
+
+                return value
+            }
+            .asyncMap { [weak self] (text: String) async throws -> [Show] in
+                guard let self = self else { return  [] }
+                return try await self.showDAO.searchMany(query: text)
+            }
+            .catch { error in
+                Just([])
+            }
+            .compactMap { shows -> [ShowCellViewModel]? in
+                return shows.map { ShowCellViewModel(from: $0)}
+            }
+            .sink(receiveValue: { [weak self] result in
+                self?.snapshot.deleteItems(self?.snapshot.itemIdentifiers ?? [])
+                self?.snapshot.appendItems(result, toSection: .showList)
+            })
+    }
+    
+    func handleSearch(searchText: String?) {
+        guard self.searchText != searchText else { return }
+        if searchCancellable == nil {
+            beginSearch()
+        }
+        self.searchText = searchText
     }
     
     @MainActor

@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct ShowResult: Decodable {
+    let score: Double
+    let show: Show
+}
+
 class ShowNetworkDAO: ShowDAO {
     
     let manager: NetworkManager
@@ -15,6 +20,11 @@ class ShowNetworkDAO: ShowDAO {
     init(manager: NetworkManager = NetworkManager()) {
         self.manager = manager
         self.baseURL = URL(string: "https://api.tvmaze.com")!
+    }
+    
+    func searchMany(query: String) async throws -> [Show] {
+        let request = ShowSearchRequestModel(baseURL: baseURL, query: query)
+        return try await manager.request(with: request).map { $0.show }
     }
     
     func fetchMany(page: Int?) async throws -> [Show] {

@@ -16,7 +16,7 @@ class HomeCoordinator: TabBarCoordinator<HomeCoordinator.Tabs> {
     let showsCoordinator: ShowsCoordinator
     
     init() {
-        let shows = ShowsCoordinator()
+        let shows = ShowsCoordinator(isSeachEnabled: true)
         self.showsCoordinator = shows
         super.init(tabs: [shows])
     }

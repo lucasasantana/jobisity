@@ -81,7 +81,7 @@ extension ShowCellContentView: ViewCodable {
 struct ShowCellConfiguration: UIContentConfiguration {
     
     let title: String
-    let posterURL: URL
+    let posterURL: URL?
     
     func makeContentView() -> UIView & UIContentView {
         ShowCellContentView(configuration: self)

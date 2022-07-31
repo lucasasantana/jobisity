@@ -30,6 +30,7 @@
 		CD7881352896C7B40085B0F5 /* NSMutableAttributedString+trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */; };
 		CD7881372896D65B0085B0F5 /* ShowGenresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881362896D65B0085B0F5 /* ShowGenresCell.swift */; };
 		CD78813A2896EC290085B0F5 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881392896EC290085B0F5 /* HomeCoordinator.swift */; };
+		CD78813C2896FCBD0085B0F5 /* ShowSearchRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78813B2896FCBD0085B0F5 /* ShowSearchRequestModel.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */; };
@@ -81,6 +82,7 @@
 		CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+trim.swift"; sourceTree = "<group>"; };
 		CD7881362896D65B0085B0F5 /* ShowGenresCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGenresCell.swift; sourceTree = "<group>"; };
 		CD7881392896EC290085B0F5 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		CD78813B2896FCBD0085B0F5 /* ShowSearchRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSearchRequestModel.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				CDF5048228948D81008A0191 /* ShowListRequestModel.swift */,
+				CD78813B2896FCBD0085B0F5 /* ShowSearchRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				CDF5047728948A46008A0191 /* NetworkManager.swift in Sources */,
 				CD788129289603C40085B0F5 /* ShowDetailViewModel.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
+				CD78813C2896FCBD0085B0F5 /* ShowSearchRequestModel.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
 				CDF5044C289481A1008A0191 /* ViewController.swift in Sources */,
 				CDF5047C28948A46008A0191 /* Router.swift in Sources */,

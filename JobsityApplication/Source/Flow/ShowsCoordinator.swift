@@ -17,7 +17,10 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
         case episodeDetail(Episode)
     }
     
-    init() {
+    let isSeachEnabled: Bool
+    
+    init(isSeachEnabled: Bool) {
+        self.isSeachEnabled = isSeachEnabled
         super.init(initialRoute: .showList)
         rootViewController.tabBarItem.image = UIImage(systemName: "house")
         rootViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
@@ -26,7 +29,12 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
     override func prepareTransition(for route: Routes) -> NavigationTransition {
         switch route {
             case .showList:
-                let viewModel = ShowListViewModel(showDAO: ShowNetworkDAO(), imageDAO: ImageKingfisherDAO(), router: unownedRouter)
+                let viewModel = ShowListViewModel(
+                    isSearchEnabled: isSeachEnabled,
+                    showDAO: ShowNetworkDAO(),
+                    imageDAO: ImageKingfisherDAO(),
+                    router: unownedRouter
+                )
                 return .push(ShowListViewController(viewModel: viewModel))
             case let .showDetail(show):
                 let viewModel = ShowDetailViewModel(show: show, episodesDAO: EpisodeNetworkDAO(), router: unownedRouter)
