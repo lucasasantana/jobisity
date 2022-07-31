@@ -142,7 +142,7 @@ class ShowDetailViewController: UICollectionViewController {
                 for: indexPath
             )
         }
-    
+        
         return dataSource
     }()
     
@@ -172,11 +172,38 @@ class ShowDetailViewController: UICollectionViewController {
                 self?.dataSource.apply(snapshot, to: .episodes)
             }
             .store(in: &cancellables)
-
-        dataSource.apply(viewModel.configureInitialContent())
         
+        dataSource.apply(viewModel.configureInitialContent())
+        configureNavigation()
+    }
+    
+    func configureNavigation() {
         navigationItem.backButtonTitle = viewModel.title
         navigationItem.largeTitleDisplayMode = .never
+        
+        let imageProvider: (Bool) -> UIImage? = { isFavorite in
+            if isFavorite {
+                return UIImage(systemName: "star.slash.fill")
+            } else {
+                return UIImage(systemName: "star")
+            }
+        }
+        
+        let button = UIBarButtonItem(image: imageProvider(viewModel.isFavorite), style: .plain, target: self, action: #selector(handleBookmark))
+        navigationItem.rightBarButtonItem = button
+        
+        viewModel
+            .$isFavorite
+            .map { imageProvider($0) }
+            .sink { [weak self] image in
+                self?.navigationItem.rightBarButtonItem?.image = image
+            }
+            .store(in: &cancellables)
+    }
+    
+    @objc
+    func handleBookmark() {
+        viewModel.toogleFavorite()
     }
 }
 

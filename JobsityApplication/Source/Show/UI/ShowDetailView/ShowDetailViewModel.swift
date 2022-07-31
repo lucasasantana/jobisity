@@ -31,6 +31,9 @@ class ShowDetailViewModel {
         show.name
     }
     
+    @Published
+    private(set) var isFavorite: Bool
+    
     let show: Show
     private var seasons: [Season]
     
@@ -40,16 +43,29 @@ class ShowDetailViewModel {
     
     private let episodesSectionSnapshotSubject: PassthroughSubject<SectionSnapshot, Never>
     
+    private let showDAO: ShowDAO
     private let episodesDAO: EpisodeDAO
     private let router: UnownedRouter<ShowsCoordinator.Routes>
     
-    init(show: Show, episodesDAO: EpisodeDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
+    init(show: Show, showDAO: ShowDAO, episodesDAO: EpisodeDAO, router: UnownedRouter<ShowsCoordinator.Routes>) {
         self.episodesSectionSnapshotSubject = PassthroughSubject()
         self.seasons = []
+        self.isFavorite = showDAO.isFavorite(show)
         
         self.show = show
         self.router = router
+        self.showDAO = showDAO
         self.episodesDAO = episodesDAO
+    }
+    
+    func toogleFavorite() {
+        if isFavorite {
+            showDAO.removeFromFavorites(show: show)
+        } else {
+            showDAO.markAsFavorite(show: show)
+        }
+        
+        isFavorite.toggle()
     }
     
     @MainActor

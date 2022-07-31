@@ -37,7 +37,7 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
                 )
                 return .push(ShowListViewController(viewModel: viewModel))
             case let .showDetail(show):
-                let viewModel = ShowDetailViewModel(show: show, episodesDAO: EpisodeNetworkDAO(), router: unownedRouter)
+                let viewModel = ShowDetailViewModel(show: show, showDAO: ShowNetworkDAO(), episodesDAO: EpisodeNetworkDAO(), router: unownedRouter)
                 return .push(ShowDetailViewController(viewModel: viewModel))
             case let .episodeDetail(episode):
                 let viewModel = EpisodeDetailViewModel(episode: episode)

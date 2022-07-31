@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct ShowResult: Decodable {
+    let score: Double
+    let show: Show
+}
+
 struct ShowSearchRequestEndpoint: NetworkRouterEndpoint {
     
     let baseURL: URL

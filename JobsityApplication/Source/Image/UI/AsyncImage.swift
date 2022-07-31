@@ -21,6 +21,7 @@ class AsyncImage: UIImageView {
         super.init(frame: .zero)
         loadContent()
         isSkeletonable = true
+        image = UIImage(systemName: "circle.stash", compatibleWith: traitCollection)
     }
     
     required init?(coder: NSCoder) {
