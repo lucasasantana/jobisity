@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SeasonHeader: UICollectionReusableView {
+class EpisodesHeader: UICollectionReusableView {
     
     lazy var rootStackView: UIStackView = {
         let stackView = UIStackView()
@@ -19,7 +19,7 @@ class SeasonHeader: UICollectionReusableView {
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1
-        label.font = .boldSystemFont(ofSize: 24)
+        label.font = .boldSystemFont(ofSize: 32)
         return label
     }()
     
@@ -32,14 +32,13 @@ class SeasonHeader: UICollectionReusableView {
         fatalError("Not implemented")
     }
     
-    func setup(with seasonNumber: Int) {
-        titleLabel.text = "Season \(seasonNumber)"
-        
+    func setup() {
+        titleLabel.text = "Episodes"
         backgroundColor = .systemBackground
     }
 }
 
-extension SeasonHeader: ViewCodable {
+extension EpisodesHeader: ViewCodable {
     
     func setupViewHierarchy() {
         addSubview(rootStackView)

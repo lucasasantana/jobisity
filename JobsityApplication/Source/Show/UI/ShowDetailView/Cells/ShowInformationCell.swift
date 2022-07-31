@@ -35,7 +35,6 @@ class ShowInformationCellContentView: UIView, UIContentView {
     lazy var informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 32
         return stackView
     }()
     
@@ -130,7 +129,15 @@ extension ShowInformationCellContentView: ViewCodable {
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         
         posterImageView.setContentHuggingPriority(.required, for: .horizontal)
+        posterImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+                
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        timeLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        daysLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        timeLabel.setContentHuggingPriority(.required, for: .vertical)
+        daysLabel.setContentHuggingPriority(.required, for: .vertical)
         
         NSLayoutConstraint.activate {
             rootStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.verticalPadding)

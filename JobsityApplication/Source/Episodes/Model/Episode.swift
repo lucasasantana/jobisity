@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Episode {
+struct Episode: Hashable {
     
     let id: Int
     
@@ -15,9 +15,9 @@ struct Episode {
     let number: Int
     
     let name: String
-    let poster: Poster
+    let poster: Poster?
     
-    let summary: String
+    let summary: String?
 }
 
 extension Episode: Decodable {
