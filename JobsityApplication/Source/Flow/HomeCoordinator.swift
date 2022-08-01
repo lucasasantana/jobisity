@@ -12,27 +12,34 @@ class HomeCoordinator: TabBarCoordinator<HomeCoordinator.Tabs> {
     enum Tabs: Route {
         case shows
         case favorites
+        case settings
     }
     
-    let showsCoordinator: ShowsCoordinator
-    let favoritesCoordinator: ShowsCoordinator
+    let shows: Presentable
+    let favorites: Presentable
+    let settings: Presentable
     
     init() {
         let shows = ShowsCoordinator(mode: .home)
-        self.showsCoordinator = shows
+        self.shows = shows
         
         let favorites = ShowsCoordinator(mode: .favorites)
-        self.favoritesCoordinator = favorites
+        self.favorites = favorites
         
-        super.init(tabs: [shows, favorites])
+        let settings = SettingsCoordinator()
+        self.settings = settings
+        
+        super.init(tabs: [shows, favorites, settings])
     }
     
     override func prepareTransition(for route: Tabs) -> TabBarTransition {
         switch route {
             case .shows:
-                return .select(showsCoordinator)
+                return .select(shows)
             case .favorites:
-                return .select(favoritesCoordinator)
+                return .select(favorites)
+            case .settings:
+                return .select(settings)
         }
     }
 }

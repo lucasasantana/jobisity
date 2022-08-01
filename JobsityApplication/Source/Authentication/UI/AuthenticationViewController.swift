@@ -7,6 +7,33 @@
 
 import UIKit
 
+protocol AuthenticationCoordinator: AnyObject {
+    func loadContent()
+}
+
+class AuthenticationViewModel {
+    
+    enum Failure: Error {
+        case invalidPassword
+    }
+    
+    private let authenticationDAO: AuthenticationDAO
+    private weak var router: AuthenticationCoordinator?
+    
+    init(authenticationDAO: AuthenticationDAO = AuthenticationKeychainDAO.shared, router: AuthenticationCoordinator) {
+        self.authenticationDAO = authenticationDAO
+        self.router = router
+    }
+    
+    func login(withPassoword password: String?) throws {
+        if let password = password, authenticationDAO.validatePassword(value: password) {
+            router?.loadContent()
+        } else {
+            throw Failure.invalidPassword
+        }
+    }
+}
+
 class AuthenticationViewController: UIViewController {
     
     lazy var rootStackView: UIStackView = {
@@ -16,21 +43,24 @@ class AuthenticationViewController: UIViewController {
         return stackView
     }()
     
-    lazy var instructionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 24)
-        label.text = "Please enter your PIN"
-        return label
-    }()
-    
     lazy var passwordField: UITextField = {
         let field = UITextField()
         field.isSecureTextEntry = true
         field.keyboardType = .numberPad
         field.backgroundColor = .secondarySystemBackground
-        field.font = .systemFont(ofSize: 32)
+        field.font = .systemFont(ofSize: 24)
         field.inputAccessoryView = passwordToolbar
+        field.placeholder = "Please enter your PIN"
         return field
+    }()
+    
+    lazy var instructionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 24)
+        label.text = "Invalid password!!!"
+        label.textColor = .systemRed
+        label.isHidden = true
+        return label
     }()
     
     lazy var passwordToolbar: UIToolbar = {
@@ -42,7 +72,10 @@ class AuthenticationViewController: UIViewController {
         return bar
     }()
     
-    init() {
+    let viewModel: AuthenticationViewModel
+    
+    init(viewModel: AuthenticationViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,16 +92,27 @@ class AuthenticationViewController: UIViewController {
     @objc
     func handleDoneTapped() {
         passwordField.resignFirstResponder()
+        
+        do {
+            try viewModel.login(withPassoword: passwordField.text)
+        } catch {
+            displayError()
+        }
     }
     
+    func displayError() {
+        UIView.animate(withDuration: 0.2, delay: .zero) { [weak self] in
+            self?.instructionLabel.isHidden = false
+        }
+    }
 }
 
 extension AuthenticationViewController: ViewCodable {
     func setupViewHierarchy() {
         view.addSubview(rootStackView)
         
-        rootStackView.addArrangedSubview(instructionLabel)
         rootStackView.addArrangedSubview(passwordField)
+        rootStackView.addArrangedSubview(instructionLabel)
     }
     
     func setupConstraints() {

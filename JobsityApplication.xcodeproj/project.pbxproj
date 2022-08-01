@@ -36,6 +36,15 @@
 		CDA3B80828972D7C00BA0B1A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B80728972D7C00BA0B1A /* UserDefaultKeys.swift */; };
 		CDA3B80A2897379D00BA0B1A /* FavoritesShowsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */; };
 		CDA3B80F28976ABE00BA0B1A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */; };
+		CDA3B813289774BE00BA0B1A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B812289774BE00BA0B1A /* SettingsView.swift */; };
+		CDA3B815289776AB00BA0B1A /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B814289776AB00BA0B1A /* SettingsCoordinator.swift */; };
+		CDA3B819289777FB00BA0B1A /* SetupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B818289777FB00BA0B1A /* SetupPasswordView.swift */; };
+		CDA3B81B2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B81A2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift */; };
+		CDA3B81E2897FE3300BA0B1A /* AuthenticationDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B81D2897FE3300BA0B1A /* AuthenticationDAO.swift */; };
+		CDA3B8202897FE8500BA0B1A /* AuthenticationKeychainDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B81F2897FE8500BA0B1A /* AuthenticationKeychainDAO.swift */; };
+		CDA3B8232897FF7200BA0B1A /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDA3B8222897FF7200BA0B1A /* KeychainSwift */; };
+		CDA3B8262898009300BA0B1A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B8252898009300BA0B1A /* Keychain.swift */; };
+		CDA3B829289803C700BA0B1A /* SetupPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B828289803C700BA0B1A /* SetupPasswordViewModel.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* HomeShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */; };
@@ -93,6 +102,14 @@
 		CDA3B80728972D7C00BA0B1A /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesShowsListViewModel.swift; sourceTree = "<group>"; };
 		CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		CDA3B812289774BE00BA0B1A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CDA3B814289776AB00BA0B1A /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
+		CDA3B818289777FB00BA0B1A /* SetupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPasswordView.swift; sourceTree = "<group>"; };
+		CDA3B81A2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+EndEditting.swift"; sourceTree = "<group>"; };
+		CDA3B81D2897FE3300BA0B1A /* AuthenticationDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDAO.swift; sourceTree = "<group>"; };
+		CDA3B81F2897FE8500BA0B1A /* AuthenticationKeychainDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationKeychainDAO.swift; sourceTree = "<group>"; };
+		CDA3B8252898009300BA0B1A /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		CDA3B828289803C700BA0B1A /* SetupPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPasswordViewModel.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShowListViewModel.swift; sourceTree = "<group>"; };
@@ -131,6 +148,7 @@
 			files = (
 				CD7881332896C2C80085B0F5 /* SkeletonView in Frameworks */,
 				CD65284B28956D6D0048ACEA /* XCoordinatorCombine in Frameworks */,
+				CDA3B8232897FF7200BA0B1A /* KeychainSwift in Frameworks */,
 				CD65284928956D6D0048ACEA /* XCoordinator in Frameworks */,
 				CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */,
 			);
@@ -145,6 +163,7 @@
 				CD65284E289573220048ACEA /* AppCoordinator.swift */,
 				CD7881392896EC290085B0F5 /* HomeCoordinator.swift */,
 				CD65284C28956DCA0048ACEA /* ShowsCoordinator.swift */,
+				CDA3B814289776AB00BA0B1A /* SettingsCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -192,6 +211,7 @@
 				CD6528632895AAF30048ACEA /* UILabel+HTML.swift */,
 				CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */,
 				CD78813F28972C240085B0F5 /* Sequence+async.swift */,
+				CDA3B81A2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +305,7 @@
 		CDA3B80C2897496600BA0B1A /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				CDA3B81C2897FE2600BA0B1A /* DAO */,
 				CDA3B80D2897497E00BA0B1A /* UI */,
 			);
 			path = Authentication;
@@ -296,6 +317,56 @@
 				CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		CDA3B816289777D100BA0B1A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B817289777D600BA0B1A /* UI */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CDA3B817289777D600BA0B1A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B812289774BE00BA0B1A /* SettingsView.swift */,
+				CDA3B827289803B900BA0B1A /* SetupPasswordView */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CDA3B81C2897FE2600BA0B1A /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B81D2897FE3300BA0B1A /* AuthenticationDAO.swift */,
+				CDA3B81F2897FE8500BA0B1A /* AuthenticationKeychainDAO.swift */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		CDA3B8212897FF7200BA0B1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDA3B8242898007D00BA0B1A /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B8252898009300BA0B1A /* Keychain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		CDA3B827289803B900BA0B1A /* SetupPasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B818289777FB00BA0B1A /* SetupPasswordView.swift */,
+				CDA3B828289803C700BA0B1A /* SetupPasswordViewModel.swift */,
+			);
+			path = SetupPasswordView;
 			sourceTree = "<group>";
 		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
@@ -322,6 +393,7 @@
 			children = (
 				CDF50446289481A1008A0191 /* JobsityApplication */,
 				CDF50445289481A1008A0191 /* Products */,
+				CDA3B8212897FF7200BA0B1A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -348,6 +420,7 @@
 		CDF5045B28948201008A0191 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				CDA3B8242898007D00BA0B1A /* Keychain */,
 				CDA3B80628972D6A00BA0B1A /* UserDefaults */,
 				CD6528602895A4880048ACEA /* Extensions */,
 				CD65285A2895881F0048ACEA /* ViewCodable */,
@@ -372,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				CD65284628956D240048ACEA /* Flow */,
+				CDA3B816289777D100BA0B1A /* Settings */,
 				CDA3B80C2897496600BA0B1A /* Authentication */,
 				CD7881122895D4FA0085B0F5 /* Image */,
 				CDF5047F28948D35008A0191 /* Show */,
@@ -517,6 +591,7 @@
 				CD65284828956D6D0048ACEA /* XCoordinator */,
 				CD65284A28956D6D0048ACEA /* XCoordinatorCombine */,
 				CD7881322896C2C80085B0F5 /* SkeletonView */,
+				CDA3B8222897FF7200BA0B1A /* KeychainSwift */,
 			);
 			productName = JobsityApplication;
 			productReference = CDF50444289481A1008A0191 /* JobsityApplication.app */;
@@ -585,10 +660,12 @@
 				CDF5047528948A46008A0191 /* HTTPHeaders.swift in Sources */,
 				CDF5047828948A46008A0191 /* EncoderError.swift in Sources */,
 				CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */,
+				CDA3B8262898009300BA0B1A /* Keychain.swift in Sources */,
 				CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */,
 				CDF5047328948A46008A0191 /* HTTPTask.swift in Sources */,
 				CD78811B2895D7F60085B0F5 /* EpisodeNetworkDAO.swift in Sources */,
 				CD7881172895D54B0085B0F5 /* EpisodeDAO.swift in Sources */,
+				CDA3B815289776AB00BA0B1A /* SettingsCoordinator.swift in Sources */,
 				CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */,
 				CD7881202895D82E0085B0F5 /* Episode.swift in Sources */,
 				CDA3B80A2897379D00BA0B1A /* FavoritesShowsListViewModel.swift in Sources */,
@@ -596,6 +673,7 @@
 				CD788129289603C40085B0F5 /* ShowDetailViewModel.swift in Sources */,
 				CDF5047A28948A46008A0191 /* JSONParameterEncoder.swift in Sources */,
 				CD78813C2896FCBD0085B0F5 /* ShowSearchRequestModel.swift in Sources */,
+				CDA3B8202897FE8500BA0B1A /* AuthenticationKeychainDAO.swift in Sources */,
 				CD78814028972C240085B0F5 /* Sequence+async.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
 				CDF5044C289481A1008A0191 /* ViewController.swift in Sources */,
@@ -603,8 +681,10 @@
 				CDF5047D28948A46008A0191 /* NetworkRouterError.swift in Sources */,
 				CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */,
 				CDF5047428948A46008A0191 /* HTTPMethod.swift in Sources */,
+				CDA3B813289774BE00BA0B1A /* SettingsView.swift in Sources */,
 				CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */,
 				CDF5047928948A46008A0191 /* URLParameterEncoder.swift in Sources */,
+				CDA3B81B2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift in Sources */,
 				CD78812D289606530085B0F5 /* EpisodeDetailViewController.swift in Sources */,
 				CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */,
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
@@ -613,6 +693,7 @@
 				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
 				CD7881252895E3C90085B0F5 /* EpisodesHeader.swift in Sources */,
 				CD7881302896C2000085B0F5 /* AsyncImage.swift in Sources */,
+				CDA3B81E2897FE3300BA0B1A /* AuthenticationDAO.swift in Sources */,
 				CDF5047E28948A46008A0191 /* URLSessionProvider.swift in Sources */,
 				CDF5048628948D99008A0191 /* ShowDAO.swift in Sources */,
 				CDB031D02894DBAB005A8952 /* HomeShowListViewModel.swift in Sources */,
@@ -622,11 +703,13 @@
 				CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */,
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
 				CD652852289583960048ACEA /* ShowDetailViewController.swift in Sources */,
+				CDA3B829289803C700BA0B1A /* SetupPasswordViewModel.swift in Sources */,
 				CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */,
 				CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */,
 				CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */,
 				CDF5047B28948A46008A0191 /* NetworkRouter.swift in Sources */,
 				CDA3B80828972D7C00BA0B1A /* UserDefaultKeys.swift in Sources */,
+				CDA3B819289777FB00BA0B1A /* SetupPasswordView.swift in Sources */,
 				CDA3B80F28976ABE00BA0B1A /* AuthenticationViewController.swift in Sources */,
 				CD78813E28972A670085B0F5 /* ShowFetchRequestModel.swift in Sources */,
 			);
@@ -889,6 +972,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CD7881312896C2C80085B0F5 /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		CDA3B8222897FF7200BA0B1A /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDA3B80B2897492200BA0B1A /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		CDF5048F2894AEDD008A0191 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -23,18 +23,32 @@ class AppCoordinator: NavigationCoordinator<AppCoordinator.AppRoute> {
         case auth
     }
     
-    lazy var homeCoordinator = HomeCoordinator()
+    lazy var home: Presentable = HomeCoordinator()
+    lazy var authentication: Presentable = {
+        let viewModel = AuthenticationViewModel(router: self)
+        return AuthenticationViewController(viewModel: viewModel)
+    }()
     
     init() {
-        super.init(initialRoute: .auth)
+        if AuthenticationKeychainDAO.shared.isPasswordSetup {
+            super.init(initialRoute: .auth)
+        } else {
+            super.init(initialRoute: .content)
+        }
     }
     
     override func prepareTransition(for route: AppRoute) -> NavigationTransition {
         switch route {
             case .content:
-                return .presentFullScreen(homeCoordinator)
+                return .presentFullScreen(home)
             case .auth:
-                return .presentFullScreen(AuthenticationViewController())
+                return .presentFullScreen(authentication)
         }
+    }
+}
+
+extension AppCoordinator: AuthenticationCoordinator {
+    func loadContent() {
+        trigger(.content)
     }
 }
