@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 class AuthenticationKeychainDAO: AuthenticationDAO {
     
     static let shared = AuthenticationKeychainDAO()
+    
+    lazy var laContext = LAContext()
+    
+    @KeyChainBool(key: .isBiometryEnabled)
+    var isBiometryEnabledKeychain: Bool?
     
     @KeyChainBool(key: .isPinSetup)
     var isPasswordSetupKeychain: Bool?
@@ -17,9 +23,25 @@ class AuthenticationKeychainDAO: AuthenticationDAO {
     @KeyChainString(key: .pinCode)
     var pinCode: String?
     
+    var isBiometryAvailable: Bool {
+        laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+    }
+    
+    var isBiometryEnabled: Bool {
+        get {
+            guard isBiometryAvailable else { return false }
+            return isBiometryEnabledKeychain ?? false
+        }
+        set { isBiometryEnabledKeychain = newValue }
+    }
+    
     var isPasswordSetup: Bool {
         get { isPasswordSetupKeychain ?? false }
         set { isPasswordSetupKeychain = newValue }
+    }
+    
+    func callBiometryAuthentication() async -> Bool {
+        (try? await laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Unlock your shows")) ?? false
     }
     
     func updatePassword(newValue: String) throws {
@@ -33,5 +55,9 @@ class AuthenticationKeychainDAO: AuthenticationDAO {
     
     func validatePassword(value: String) -> Bool {
         value == pinCode
+    }
+    
+    func setIsBiometryEnabled(_ newValue: Bool) {
+        isBiometryEnabled = newValue
     }
 }

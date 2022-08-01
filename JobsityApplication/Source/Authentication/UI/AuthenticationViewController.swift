@@ -17,12 +17,26 @@ class AuthenticationViewModel {
         case invalidPassword
     }
     
+    var isBiometryEnabled: Bool {
+        authenticationDAO.isBiometryEnabled
+    }
+    
     private let authenticationDAO: AuthenticationDAO
     private weak var router: AuthenticationCoordinator?
     
     init(authenticationDAO: AuthenticationDAO = AuthenticationKeychainDAO.shared, router: AuthenticationCoordinator) {
         self.authenticationDAO = authenticationDAO
         self.router = router
+    }
+    
+    @MainActor
+    func callBiometry() {
+        guard authenticationDAO.isBiometryEnabled else { return }
+        Task {
+            if await authenticationDAO.callBiometryAuthentication() {
+                router?.loadContent()
+            }
+        }
     }
     
     func login(withPassoword password: String?) throws {
@@ -40,6 +54,7 @@ class AuthenticationViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -56,7 +71,7 @@ class AuthenticationViewController: UIViewController {
     
     lazy var instructionLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 24)
+        label.font = .systemFont(ofSize: 16)
         label.text = "Invalid password!!!"
         label.textColor = .systemRed
         label.isHidden = true
@@ -87,6 +102,11 @@ class AuthenticationViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         view.backgroundColor = .systemBackground
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.callBiometry()
     }
     
     @objc

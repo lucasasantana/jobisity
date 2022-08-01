@@ -13,8 +13,13 @@ class SetupPasswordViewModel: ObservableObject {
     @Published
     var newPassword = ""
     
-    @Published
-    var isBiomeryEnabled = false
+    lazy var isBiometryEnabled: Binding<Bool> = {
+        Binding { [weak self] in
+            self?.authenticationDAO.isBiometryEnabled ?? false
+        } set: { [weak self] newValue in
+            self?.authenticationDAO.setIsBiometryEnabled(newValue)
+        }
+    }()
     
     var isPasswordSetup: Bool {
         authenticationDAO.isPasswordSetup

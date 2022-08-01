@@ -52,7 +52,7 @@ struct SetupPasswordView: View {
                 }
                 
                 if viewModel.isPasswordSetup {
-                    Toggle(isOn: $viewModel.isBiomeryEnabled) {
+                    Toggle(isOn: viewModel.isBiometryEnabled) {
                         Text("Use biometry")
                     }
                 }

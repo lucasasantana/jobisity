@@ -14,6 +14,7 @@ extension KeychainSwift {
 
 enum KeychainKeys: String {
     case isPinSetup
+    case isBiometryEnabled
     case pinCode
 }
 

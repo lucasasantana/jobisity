@@ -12,8 +12,13 @@ enum AuthenticationDAOError: Error {
 }
 
 protocol AuthenticationDAO {
-    var isPasswordSetup: Bool { get }
     
+    var isPasswordSetup: Bool { get }
+    var isBiometryEnabled: Bool { get }
+    var isBiometryAvailable: Bool { get }
+    
+    func callBiometryAuthentication() async -> Bool
+    func setIsBiometryEnabled(_ newValue: Bool)
     func updatePassword(newValue: String) throws
     func validatePassword(value: String) -> Bool
 }
