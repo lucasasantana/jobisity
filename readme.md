@@ -5,9 +5,11 @@
 Clone this repo and open `JobsityApplication.xcodeproj`\
 The project was build using XCode 13.4.1
 
-## Features
+## Architecture
 
-### Instructions
+![App Architecture](./img/arch.jpg)
+
+## Features
 
 - :white_check_mark: - Implemented
 - :x: - Not implemented
