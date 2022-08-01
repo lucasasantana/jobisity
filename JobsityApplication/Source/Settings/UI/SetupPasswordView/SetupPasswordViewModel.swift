@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 
 class SetupPasswordViewModel: ObservableObject {
     
@@ -15,11 +16,20 @@ class SetupPasswordViewModel: ObservableObject {
     @Published
     var isBiomeryEnabled = false
     
-    @Published
-    var isPasswordSetup = false
+    var isPasswordSetup: Bool {
+        authenticationDAO.isPasswordSetup
+    }
     
     @Published
     var isErrorDisplayed = false
+    
+    var pinCodeSetupTitle: String {
+        if isPasswordSetup {
+            return "Update your pin code"
+        } else {
+            return "Configure your pin code"
+        }
+    }
     
     let authenticationDAO: AuthenticationDAO
     
@@ -35,6 +45,7 @@ class SetupPasswordViewModel: ObservableObject {
         
         do {
             try authenticationDAO.updatePassword(newValue: newPassword)
+            objectWillChange.send()
         } catch {
             isErrorDisplayed = true
         }

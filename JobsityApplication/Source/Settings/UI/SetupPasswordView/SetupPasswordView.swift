@@ -48,7 +48,7 @@ struct SetupPasswordView: View {
                 NavigationLink(isActive: $isUpdatingPassword) {
                     passwordSetup
                 } label: {
-                    Text("Configure PIN code")
+                    Text(viewModel.pinCodeSetupTitle)
                 }
                 
                 if viewModel.isPasswordSetup {
