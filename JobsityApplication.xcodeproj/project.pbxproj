@@ -35,6 +35,7 @@
 		CD78814028972C240085B0F5 /* Sequence+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD78813F28972C240085B0F5 /* Sequence+async.swift */; };
 		CDA3B80828972D7C00BA0B1A /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B80728972D7C00BA0B1A /* UserDefaultKeys.swift */; };
 		CDA3B80A2897379D00BA0B1A /* FavoritesShowsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */; };
+		CDA3B80F28976ABE00BA0B1A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* HomeShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */; };
@@ -91,6 +92,7 @@
 		CD78813F28972C240085B0F5 /* Sequence+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+async.swift"; sourceTree = "<group>"; };
 		CDA3B80728972D7C00BA0B1A /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesShowsListViewModel.swift; sourceTree = "<group>"; };
+		CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShowListViewModel.swift; sourceTree = "<group>"; };
@@ -280,6 +282,22 @@
 			path = UserDefaults;
 			sourceTree = "<group>";
 		};
+		CDA3B80C2897496600BA0B1A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B80D2897497E00BA0B1A /* UI */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CDA3B80D2897497E00BA0B1A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3B80E28976ABD00BA0B1A /* AuthenticationViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				CD65284628956D240048ACEA /* Flow */,
+				CDA3B80C2897496600BA0B1A /* Authentication */,
 				CD7881122895D4FA0085B0F5 /* Image */,
 				CDF5047F28948D35008A0191 /* Show */,
 				CD7881132895D5120085B0F5 /* Episodes */,
@@ -531,6 +550,7 @@
 				CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CD65284728956D6D0048ACEA /* XCRemoteSwiftPackageReference "XCoordinator" */,
 				CD7881312896C2C80085B0F5 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				CDA3B80B2897492200BA0B1A /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = CDF50445289481A1008A0191 /* Products */;
 			projectDirPath = "";
@@ -607,6 +627,7 @@
 				CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */,
 				CDF5047B28948A46008A0191 /* NetworkRouter.swift in Sources */,
 				CDA3B80828972D7C00BA0B1A /* UserDefaultKeys.swift in Sources */,
+				CDA3B80F28976ABE00BA0B1A /* AuthenticationViewController.swift in Sources */,
 				CD78813E28972A670085B0F5 /* ShowFetchRequestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -833,6 +854,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		CDA3B80B2897492200BA0B1A /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = revision;
+				revision = d108a1fa6189e661f91560548ef48651ed8d93b9;
 			};
 		};
 		CDF5048E2894AEDC008A0191 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

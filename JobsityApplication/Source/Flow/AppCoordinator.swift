@@ -20,18 +20,21 @@ class AppCoordinator: NavigationCoordinator<AppCoordinator.AppRoute> {
     
     enum AppRoute: Route {
         case content
+        case auth
     }
     
     lazy var homeCoordinator = HomeCoordinator()
     
     init() {
-        super.init(initialRoute: .content)
+        super.init(initialRoute: .auth)
     }
     
     override func prepareTransition(for route: AppRoute) -> NavigationTransition {
         switch route {
             case .content:
                 return .presentFullScreen(homeCoordinator)
+            case .auth:
+                return .presentFullScreen(AuthenticationViewController())
         }
     }
 }
