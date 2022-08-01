@@ -1,13 +1,11 @@
 # Jobsity iOS Challenge - Lucas Antevere Santana
 
-## Instalation
+## Installation
 
-Clone this repo and open `JobsityApplication.xcodeproj`
+Clone this repo and open `JobsityApplication.xcodeproj`\
 The project was build using XCode 13.4.1
 
 ## Features
-
-The following features were implemented
 
 ### Instructions
 
