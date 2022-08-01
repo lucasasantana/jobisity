@@ -8,15 +8,28 @@
 import Combine
 import UIKit
 
+protocol ShowDetailViewModelProtocol {
+    var episodesSectionSnapshotPublisher: AnyPublisher<ShowDetailSectionSnapshot, Never> { get }
+    var isFavoritePublisher: AnyPublisher<Bool, Never> { get }
+    var isFavorite: Bool { get }
+    var sceneTitle: String { get }
+    var show: Show { get }
+    
+    func loadInitialContent() -> ShowDetailDataSourceSnapshot
+    func toogleFavorite()
+    func shouldSelect(at: IndexPath) -> Bool
+    func handleCellSelection(cell: ShowDetailCell)
+}
+
 class ShowDetailViewController: UICollectionViewController {
     
-    typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailViewModel.Section, ShowDetailViewModel.Cell>
+    typealias DataSource = UICollectionViewDiffableDataSource<ShowDetailSection, ShowDetailCell>
     
-    typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, ShowDetailViewModel.Cell>
-    typealias ShowSummaryCellRegistration = UICollectionView.CellRegistration<ShowSummaryCell, ShowDetailViewModel.Cell>
-    typealias ShowGenreCellRegistration = UICollectionView.CellRegistration<ShowGenresCell, ShowDetailViewModel.Cell>
-    typealias EpisodeCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailViewModel.Cell>
-    typealias SeasonCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailViewModel.Cell>
+    typealias ShowInformationCellRegistration = UICollectionView.CellRegistration<ShowInformationCell, ShowDetailCell>
+    typealias ShowSummaryCellRegistration = UICollectionView.CellRegistration<ShowSummaryCell, ShowDetailCell>
+    typealias ShowGenreCellRegistration = UICollectionView.CellRegistration<ShowGenresCell, ShowDetailCell>
+    typealias EpisodeCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailCell>
+    typealias SeasonCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, ShowDetailCell>
     
     typealias EpisodesHeaderRegistration = UICollectionView.SupplementaryRegistration<EpisodesHeader>
     
@@ -58,7 +71,7 @@ class ShowDetailViewController: UICollectionViewController {
     
     lazy var episodeCellRegistration: EpisodeCellRegistration = {
         EpisodeCellRegistration { [unowned self] cell, indexPath, item in
-            guard case let ShowDetailViewModel.Cell.episode(episode) = item else {
+            guard case let ShowDetailCell.episode(episode) = item else {
                 return
             }
             
@@ -71,7 +84,7 @@ class ShowDetailViewController: UICollectionViewController {
     
     lazy var seasonCellRegistration: SeasonCellRegistration = {
         SeasonCellRegistration { [unowned self] cell, _, season in
-            guard case let ShowDetailViewModel.Cell.season(value) = season else {
+            guard case let ShowDetailCell.season(value) = season else {
                 return
             }
             
@@ -146,10 +159,10 @@ class ShowDetailViewController: UICollectionViewController {
         return dataSource
     }()
     
-    let viewModel: ShowDetailViewModel
+    let viewModel: ShowDetailViewModelProtocol
     lazy var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: ShowDetailViewModel) {
+    init(viewModel: ShowDetailViewModelProtocol) {
         self.viewModel = viewModel
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
@@ -173,12 +186,12 @@ class ShowDetailViewController: UICollectionViewController {
             }
             .store(in: &cancellables)
         
-        dataSource.apply(viewModel.configureInitialContent())
+        dataSource.apply(viewModel.loadInitialContent())
         configureNavigation()
     }
     
     func configureNavigation() {
-        navigationItem.backButtonTitle = viewModel.title
+        navigationItem.backButtonTitle = viewModel.sceneTitle
         navigationItem.largeTitleDisplayMode = .never
         
         let imageProvider: (Bool) -> UIImage? = { isFavorite in
@@ -193,7 +206,7 @@ class ShowDetailViewController: UICollectionViewController {
         navigationItem.rightBarButtonItem = button
         
         viewModel
-            .$isFavorite
+            .isFavoritePublisher
             .map { imageProvider($0) }
             .sink { [weak self] image in
                 self?.navigationItem.rightBarButtonItem?.image = image
@@ -229,7 +242,7 @@ extension ShowDetailViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (cell as? ShowInformationCell) != nil {
-            self.title = self.viewModel.title
+            self.title = self.viewModel.sceneTitle
         }
     }
 }

@@ -72,17 +72,9 @@ class ShowListViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.snapshotPublisher.sink { [weak self] snapshot in
-            self?.dataSource.apply(snapshot, animatingDifferences: true)
-        }
-        .store(in: &cancellables)
+        setupSnapshotUpdateHandler()
+        setupNavigationBar()
         viewModel.configureInitialContent()
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        if viewModel.isSearchEnabled {
-            navigationItem.searchController = seachController
-            seachController.searchResultsUpdater = self
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,12 +82,27 @@ class ShowListViewController: UICollectionViewController {
         viewModel.reloadContentIfNeeded()
     }
     
-    func configureCollection() {
+    private func configureCollection() {
         let listConfiguration = UICollectionLayoutListConfiguration.init(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
     
         collectionView.prefetchDataSource = self
         collectionView.collectionViewLayout = layout
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        if viewModel.isSearchEnabled {
+            navigationItem.searchController = seachController
+            seachController.searchResultsUpdater = self
+        }
+    }
+    
+    private func setupSnapshotUpdateHandler() {
+        viewModel.snapshotPublisher.sink { [weak self] snapshot in
+            self?.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+        .store(in: &cancellables)
     }
 }
 

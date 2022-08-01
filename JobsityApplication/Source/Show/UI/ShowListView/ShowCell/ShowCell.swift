@@ -35,7 +35,7 @@ class ShowCellContentView: UIView, UIContentView {
         return stack
     }()
     
-    internal init(configuration: UIContentConfiguration) {
+    init(configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
         setupView()
@@ -101,7 +101,6 @@ class ShowCell: UICollectionViewListCell {
         )
         
         contentConfiguration = config
-        
         accessories = [.disclosureIndicator()]
     }
 }

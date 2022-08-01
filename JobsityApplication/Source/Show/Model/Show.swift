@@ -15,13 +15,13 @@ struct Poster: Decodable, Hashable {
 struct Schedule: Decodable {
     
     enum Day: String, Codable {
-        case friday = "Friday"
         case monday = "Monday"
-        case saturday = "Saturday"
-        case sunday = "Sunday"
-        case thursday = "Thursday"
         case tuesday = "Tuesday"
         case wednesday = "Wednesday"
+        case thursday = "Thursday"
+        case friday = "Friday"
+        case saturday = "Saturday"
+        case sunday = "Sunday"
     }
     
     enum CodingKeys: String, CodingKey {

@@ -6,31 +6,13 @@
 //
 
 import UIKit
-import Kingfisher
 
-class EpisodeDetailViewModel {
+protocol EpisodeDetailViewModelProtocol {
+    var title: String { get }
+    var seasonAndNumber: String { get }
+    var summary: String? { get }
     
-    var title: String {
-        episode.name
-    }
-    
-    var seasonAndNumber: String {
-        "Season \(episode.season), Episode \(episode.number)"
-    }
-    
-    var posterURL: URL? {
-        episode.poster?.medium
-    }
-    
-    var summary: String? {
-        episode.summary
-    }
-   
-    private let episode: Episode
-    
-    init(episode: Episode) {
-        self.episode = episode
-    }
+    var posterURL: URL? { get }
 }
 
 class EpisodeDetailViewController: UIViewController {
@@ -39,7 +21,7 @@ class EpisodeDetailViewController: UIViewController {
         static let horizontalPadding: CGFloat = 24
     }
     
-    let viewModel: EpisodeDetailViewModel
+    let viewModel: EpisodeDetailViewModelProtocol
     
     lazy var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -84,7 +66,7 @@ class EpisodeDetailViewController: UIViewController {
         return label
     }()
     
-    init(viewModel: EpisodeDetailViewModel) {
+    init(viewModel: EpisodeDetailViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

@@ -24,6 +24,7 @@ class AppCoordinator: NavigationCoordinator<AppCoordinator.AppRoute> {
     }
     
     lazy var home: Presentable = HomeCoordinator()
+    
     lazy var authentication: Presentable = {
         let viewModel = AuthenticationViewModel(router: self)
         return AuthenticationViewController(viewModel: viewModel)

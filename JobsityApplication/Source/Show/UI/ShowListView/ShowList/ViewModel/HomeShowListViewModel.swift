@@ -53,18 +53,19 @@ class HomeShowListViewModel: ShowListViewModelProtocol {
         /* Not implemented */
     }
     
-    @MainActor private func fetchContent() {
+    @MainActor
+    private func fetchContent() {
         guard !isLoading else { return }
         isLoading = true
         Task {
             do {
-                let shows = try await showDAO.fetchMany(page: page).map { show in
+                let fetchedShows = try await showDAO.fetchMany(page: page).map { show in
                     return ShowCellViewModel(from: show)
                 }
                 
                 page += 1
-                self.shows.append(contentsOf: shows)
-                snapshot.appendItems(shows, toSection: .showList)
+                shows.append(contentsOf: fetchedShows)
+                snapshot.appendItems(fetchedShows, toSection: .showList)
                 isLoading = false
             } catch {
                 print("Unexpected error: \(error)")
@@ -94,15 +95,14 @@ extension HomeShowListViewModel {
 
                 return value
             }
-            .asyncMap { [weak self] (text: String) async throws -> [Show] in
-                guard let self = self else { return  [] }
-                return try await self.showDAO.searchMany(query: text)
+            .asyncMap { [weak self] (text: String) async throws -> [Show]? in
+                return try await self?.showDAO.searchMany(query: text)
             }
-            .catch { error in
+            .catch { _ in
                 Just([])
             }
             .compactMap { shows -> [ShowCellViewModel]? in
-                return shows.map { ShowCellViewModel(from: $0)}
+                return shows?.map { ShowCellViewModel(from: $0)}
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

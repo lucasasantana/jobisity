@@ -56,7 +56,10 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
                     router: unownedRouter
                 )
             case .favorites:
-                return FavoritesShowsListViewModel(showDAO: showDAO, router: unownedRouter)
+                return FavoritesShowsListViewModel(
+                    showDAO: showDAO,
+                    router: unownedRouter
+                )
         }
     }
     
@@ -65,6 +68,7 @@ class ShowsCoordinator: NavigationCoordinator<ShowsCoordinator.Routes> {
             case .home:
                 rootViewController.tabBarItem.image = UIImage(systemName: "house")
                 rootViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+                
             case .favorites:
                 rootViewController.tabBarItem.image = UIImage(systemName: "star")
                 rootViewController.tabBarItem.selectedImage = UIImage(systemName: "star.fill")

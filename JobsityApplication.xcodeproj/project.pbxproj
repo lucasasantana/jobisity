@@ -13,7 +13,7 @@
 		CD65284F289573220048ACEA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65284E289573220048ACEA /* AppCoordinator.swift */; };
 		CD652852289583960048ACEA /* ShowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652851289583960048ACEA /* ShowDetailViewController.swift */; };
 		CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528552895859D0048ACEA /* ShowInformationCell.swift */; };
-		CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */; };
+		CD652859289587120048ACEA /* NSLayoutConstraints+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD652858289587120048ACEA /* NSLayoutConstraints+Builder.swift */; };
 		CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65285B2895882C0048ACEA /* ViewCodable.swift */; };
 		CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6528632895AAF30048ACEA /* UILabel+HTML.swift */; };
 		CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */; };
@@ -45,12 +45,12 @@
 		CDA3B8232897FF7200BA0B1A /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDA3B8222897FF7200BA0B1A /* KeychainSwift */; };
 		CDA3B8262898009300BA0B1A /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B8252898009300BA0B1A /* Keychain.swift */; };
 		CDA3B829289803C700BA0B1A /* SetupPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B828289803C700BA0B1A /* SetupPasswordViewModel.swift */; };
+		CDA3B82C289875B600BA0B1A /* EpisodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3B82B289875B600BA0B1A /* EpisodeDetailViewModel.swift */; };
 		CDB031CC2894DB5E005A8952 /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CB2894DB5E005A8952 /* ShowCell.swift */; };
 		CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */; };
 		CDB031D02894DBAB005A8952 /* HomeShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */; };
 		CDF50448289481A1008A0191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF50447289481A1008A0191 /* AppDelegate.swift */; };
 		CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF50449289481A1008A0191 /* SceneDelegate.swift */; };
-		CDF5044C289481A1008A0191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5044B289481A1008A0191 /* ViewController.swift */; };
 		CDF50451289481A5008A0191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF50450289481A5008A0191 /* Assets.xcassets */; };
 		CDF50454289481A5008A0191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDF50452289481A5008A0191 /* LaunchScreen.storyboard */; };
 		CDF5045F289487F0008A0191 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5045E289487F0008A0191 /* Show.swift */; };
@@ -72,7 +72,6 @@
 		CDF5048928948EAA008A0191 /* ShowNetworkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */; };
 		CDF5048D289492DE008A0191 /* ShowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5048C289492DE008A0191 /* ShowListViewController.swift */; };
 		CDF504902894AEDD008A0191 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CDF5048F2894AEDD008A0191 /* Kingfisher */; };
-		CDF504932894B33C008A0191 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF504922894B33C008A0191 /* ImageDAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +79,7 @@
 		CD65284E289573220048ACEA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CD652851289583960048ACEA /* ShowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewController.swift; sourceTree = "<group>"; };
 		CD6528552895859D0048ACEA /* ShowInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInformationCell.swift; sourceTree = "<group>"; };
-		CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsBuilder.swift; sourceTree = "<group>"; };
+		CD652858289587120048ACEA /* NSLayoutConstraints+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraints+Builder.swift"; sourceTree = "<group>"; };
 		CD65285B2895882C0048ACEA /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
 		CD6528632895AAF30048ACEA /* UILabel+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+HTML.swift"; sourceTree = "<group>"; };
 		CD7881102895B98C0085B0F5 /* ShowSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSummaryCell.swift; sourceTree = "<group>"; };
@@ -110,13 +109,13 @@
 		CDA3B81F2897FE8500BA0B1A /* AuthenticationKeychainDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationKeychainDAO.swift; sourceTree = "<group>"; };
 		CDA3B8252898009300BA0B1A /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		CDA3B828289803C700BA0B1A /* SetupPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPasswordViewModel.swift; sourceTree = "<group>"; };
+		CDA3B82B289875B600BA0B1A /* EpisodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewModel.swift; sourceTree = "<group>"; };
 		CDB031CB2894DB5E005A8952 /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		CDB031CD2894DB7F005A8952 /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShowListViewModel.swift; sourceTree = "<group>"; };
 		CDF50444289481A1008A0191 /* JobsityApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobsityApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF50447289481A1008A0191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF50449289481A1008A0191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CDF5044B289481A1008A0191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CDF50450289481A5008A0191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF50453289481A5008A0191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDF50455289481A5008A0191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +137,6 @@
 		CDF5048528948D99008A0191 /* ShowDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDAO.swift; sourceTree = "<group>"; };
 		CDF5048828948EAA008A0191 /* ShowNetworkDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNetworkDAO.swift; sourceTree = "<group>"; };
 		CDF5048C289492DE008A0191 /* ShowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewController.swift; sourceTree = "<group>"; };
-		CDF504922894B33C008A0191 /* ImageDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,14 +187,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		CD652857289586FD0048ACEA /* ConstraintsBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				CD652858289587120048ACEA /* NSLayoutConstraintsBuilder.swift */,
-			);
-			path = ConstraintsBuilder;
-			sourceTree = "<group>";
-		};
 		CD65285A2895881F0048ACEA /* ViewCodable */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +202,7 @@
 				CD7881342896C7B40085B0F5 /* NSMutableAttributedString+trim.swift */,
 				CD78813F28972C240085B0F5 /* Sequence+async.swift */,
 				CDA3B81A2897FE0C00BA0B1A /* SwiftUI+EndEditting.swift */,
+				CD652858289587120048ACEA /* NSLayoutConstraints+Builder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				CD78812E2896C1E30085B0F5 /* UI */,
-				CDF504922894B33C008A0191 /* ImageDAO.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -282,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				CD78812C289606530085B0F5 /* EpisodeDetailViewController.swift */,
+				CDA3B82B289875B600BA0B1A /* EpisodeDetailViewModel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -369,6 +360,15 @@
 			path = SetupPasswordView;
 			sourceTree = "<group>";
 		};
+		CDA3B82A2898712700BA0B1A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */,
+				CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CDB031C92894DB47005A8952 /* ShowCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,8 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				CDF5048C289492DE008A0191 /* ShowListViewController.swift */,
-				CDB031CF2894DBAB005A8952 /* HomeShowListViewModel.swift */,
-				CDA3B8092897379D00BA0B1A /* FavoritesShowsListViewModel.swift */,
+				CDA3B82A2898712700BA0B1A /* ViewModel */,
 			);
 			path = ShowList;
 			sourceTree = "<group>";
@@ -411,7 +410,6 @@
 				CDF5045B28948201008A0191 /* Application */,
 				CDF5045C28948208008A0191 /* Resources */,
 				CDF5045D289487C3008A0191 /* Source */,
-				CDF5044B289481A1008A0191 /* ViewController.swift */,
 				CDF50455289481A5008A0191 /* Info.plist */,
 			);
 			path = JobsityApplication;
@@ -422,9 +420,7 @@
 			children = (
 				CDA3B8242898007D00BA0B1A /* Keychain */,
 				CDA3B80628972D6A00BA0B1A /* UserDefaults */,
-				CD6528602895A4880048ACEA /* Extensions */,
 				CD65285A2895881F0048ACEA /* ViewCodable */,
-				CD652857289586FD0048ACEA /* ConstraintsBuilder */,
 				CDF5046028948A05008A0191 /* Network */,
 				CDF50447289481A1008A0191 /* AppDelegate.swift */,
 				CDF50449289481A1008A0191 /* SceneDelegate.swift */,
@@ -435,6 +431,7 @@
 		CDF5045C28948208008A0191 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CD6528602895A4880048ACEA /* Extensions */,
 				CDF50452289481A5008A0191 /* LaunchScreen.storyboard */,
 				CDF50450289481A5008A0191 /* Assets.xcassets */,
 			);
@@ -654,7 +651,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD7881372896D65B0085B0F5 /* ShowGenresCell.swift in Sources */,
-				CDF504932894B33C008A0191 /* ImageDAO.swift in Sources */,
 				CD78813A2896EC290085B0F5 /* HomeCoordinator.swift in Sources */,
 				CD7881222895D8F90085B0F5 /* EpisodesAdapter.swift in Sources */,
 				CDF5047528948A46008A0191 /* HTTPHeaders.swift in Sources */,
@@ -676,7 +672,6 @@
 				CDA3B8202897FE8500BA0B1A /* AuthenticationKeychainDAO.swift in Sources */,
 				CD78814028972C240085B0F5 /* Sequence+async.swift in Sources */,
 				CDF5047628948A46008A0191 /* RequestParameters.swift in Sources */,
-				CDF5044C289481A1008A0191 /* ViewController.swift in Sources */,
 				CDF5047C28948A46008A0191 /* Router.swift in Sources */,
 				CDF5047D28948A46008A0191 /* NetworkRouterError.swift in Sources */,
 				CD7881112895B98C0085B0F5 /* ShowSummaryCell.swift in Sources */,
@@ -689,7 +684,7 @@
 				CD6528562895859D0048ACEA /* ShowInformationCell.swift in Sources */,
 				CDB031CE2894DB7F005A8952 /* ShowCellViewModel.swift in Sources */,
 				CD7881352896C7B40085B0F5 /* NSMutableAttributedString+trim.swift in Sources */,
-				CD652859289587120048ACEA /* NSLayoutConstraintsBuilder.swift in Sources */,
+				CD652859289587120048ACEA /* NSLayoutConstraints+Builder.swift in Sources */,
 				CD65285C2895882C0048ACEA /* ViewCodable.swift in Sources */,
 				CD7881252895E3C90085B0F5 /* EpisodesHeader.swift in Sources */,
 				CD7881302896C2000085B0F5 /* AsyncImage.swift in Sources */,
@@ -704,6 +699,7 @@
 				CDF5044A289481A1008A0191 /* SceneDelegate.swift in Sources */,
 				CD652852289583960048ACEA /* ShowDetailViewController.swift in Sources */,
 				CDA3B829289803C700BA0B1A /* SetupPasswordViewModel.swift in Sources */,
+				CDA3B82C289875B600BA0B1A /* EpisodeDetailViewModel.swift in Sources */,
 				CD6528642895AAF30048ACEA /* UILabel+HTML.swift in Sources */,
 				CDF5048328948D81008A0191 /* ShowListRequestModel.swift in Sources */,
 				CD65284D28956DCA0048ACEA /* ShowsCoordinator.swift in Sources */,

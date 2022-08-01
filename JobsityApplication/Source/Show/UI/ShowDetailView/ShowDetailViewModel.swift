@@ -9,39 +9,43 @@ import Combine
 import UIKit
 import XCoordinator
 
-class ShowDetailViewModel {
+typealias ShowDetailDataSourceSnapshot = NSDiffableDataSourceSnapshot<ShowDetailSection, ShowDetailCell>
+typealias ShowDetailSectionSnapshot = NSDiffableDataSourceSectionSnapshot<ShowDetailCell>
+
+enum ShowDetailSection: Hashable {
+    case information
+    case episodes
+}
+
+enum ShowDetailCell: Hashable {
+    case info
+    case summary
+    case genres
+    case season(Int)
+    case episode(Episode)
+}
+
+class ShowDetailViewModel: ShowDetailViewModelProtocol {
     
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Cell>
-    typealias SectionSnapshot = NSDiffableDataSourceSectionSnapshot<Cell>
-    
-    enum Section: Hashable {
-        case information
-        case episodes
-    }
-    
-    enum Cell: Hashable {
-        case info
-        case summary
-        case genres
-        case season(Int)
-        case episode(Episode)
-    }
-    
-    var title: String {
+    var sceneTitle: String {
         show.name
     }
     
     @Published
     private(set) var isFavorite: Bool
     
+    var isFavoritePublisher: AnyPublisher<Bool, Never> {
+        $isFavorite.eraseToAnyPublisher()
+    }
+    
     let show: Show
     private var seasons: [Season]
     
-    var episodesSectionSnapshotPublisher: AnyPublisher<SectionSnapshot, Never> {
+    var episodesSectionSnapshotPublisher: AnyPublisher<ShowDetailSectionSnapshot, Never> {
         return episodesSectionSnapshotSubject.eraseToAnyPublisher()
     }
     
-    private let episodesSectionSnapshotSubject: PassthroughSubject<SectionSnapshot, Never>
+    private let episodesSectionSnapshotSubject: PassthroughSubject<ShowDetailSectionSnapshot, Never>
     
     private let showDAO: ShowDAO
     private let episodesDAO: EpisodeDAO
@@ -70,8 +74,8 @@ class ShowDetailViewModel {
     }
     
     @MainActor
-    func configureInitialContent() -> DataSourceSnapshot {
-        var snapshot = DataSourceSnapshot()
+    func loadInitialContent() -> ShowDetailDataSourceSnapshot {
+        var snapshot = ShowDetailDataSourceSnapshot()
         snapshot.appendSections([.information, .episodes])
         snapshot.appendItems([.info, .summary, .genres], toSection: .information)
         
@@ -99,13 +103,13 @@ class ShowDetailViewModel {
             let episodes = try await episodesDAO.fetchAll(fromShowWithID: show.id)
             seasons = EpisodesAdapter.groupEpisodesBySeason(episodes)
             
-            let seasonItems = seasons.map { Cell.season($0.number) }
+            let seasonItems = seasons.map { ShowDetailCell.season($0.number) }
             
-            var sectionSnapshot = SectionSnapshot()
+            var sectionSnapshot = ShowDetailSectionSnapshot()
             sectionSnapshot.append(seasonItems)
             
             for season in seasons {
-                let episodes = season.episodes.map { Cell.episode($0) }
+                let episodes = season.episodes.map { ShowDetailCell.episode($0) }
                 sectionSnapshot.append(episodes, to: .season(season.number))
             }
             
@@ -117,8 +121,8 @@ class ShowDetailViewModel {
         return index.section > .zero
     }
     
-    func handleCellSelection(cell: Cell) {
-        guard case let Cell.episode(episode) = cell else {
+    func handleCellSelection(cell: ShowDetailCell) {
+        guard case let ShowDetailCell.episode(episode) = cell else {
             return
         }
         
