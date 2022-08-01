@@ -3,7 +3,7 @@
 ## Installation
 
 Clone this repo and open `JobsityApplication.xcodeproj`\
-The project was build using XCode 13.4.1
+The project was build using XCode 13.4.1 and supports iOS 14+
 
 ## Architecture
 
